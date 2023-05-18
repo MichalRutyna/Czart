@@ -132,7 +132,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Hero.cpp" />
+    <ClCompile Include="LTexture.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="cos.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Hero.h" />
+    <ClInclude Include="init.h" />
+    <ClInclude Include="LTexture.h" />
+    <ClInclude Include="ustawienia.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="exit.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
