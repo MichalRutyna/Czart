@@ -4,6 +4,7 @@
 #include "SDL.h"
 
 #include "ustawienia.h"
+#include "LTexture.h"
 
 class Hero{
 private:
@@ -20,14 +21,16 @@ private:
     // Aktualna prędkość
     int mVelX, mVelY;
 
-public:
-    Hero();
+    LTexture* tekstura;
 
-    void handleEvent(SDL_Event& e);
+public:
+    Hero(LTexture*);
+
+    void handleEvent(SDL_Event&);
 
     void move();
 
-    void render();
+    void render(SDL_Renderer*);
 };
 
 #endif

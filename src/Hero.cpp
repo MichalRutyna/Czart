@@ -2,7 +2,7 @@
 
 UST& Ust = UST::pobierz_ustawienia();
 
-Hero::Hero() : WIDTH(20), HEIGHT(30), NAME("Stachu Jones"), VELOCITY(10)
+Hero::Hero(LTexture* tekstura) : WIDTH(tekstura->width()), HEIGHT(tekstura->height()), NAME("Stachu Jones"), VELOCITY(10), tekstura(tekstura)
 {
 	mPosX = 0;
 	mPosY = 0;
@@ -51,7 +51,7 @@ void Hero::move()
 	}
 }
 
-void Hero::render()
+void Hero::render(SDL_Renderer* renderer)
 {
-	std::cout << "Ale render";
+	tekstura->render(renderer, mPosX, mPosY);
 }

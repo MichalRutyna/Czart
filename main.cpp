@@ -1,30 +1,37 @@
 #include <SDL.h>
-// #include <SDL_image.h>
+#include <SDL_image.h>
+
 #include "lib/ustawienia.h"
-#include "lib/ustawienia.h"
+#include "lib/init.h"
+#include "lib/close.h"
+
 #include "lib/Hero.h"
+#include "lib/LTexture.h"
 
 #include <iostream>
 #include <vector>
 
 using namespace std;
-UST& ust = UST::pobierz_ustawienia();
 
-
-void close(SDL_Window*& window)
-{
-    // TODO Usuwanie tekstur
-
-    SDL_DestroyWindow(window);
-    window = nullptr;
-
-    //IMG_Quit();
-    SDL_Quit();
-}
 
 int main(int argc, char* argv[])
 {
-    SDL_Window* window = NULL;
+    UST& ust = UST::pobierz_ustawienia();
+
+    SDL_Window* window = nullptr;
+    
+    SDL_Renderer* renderer = nullptr;
+
+
+    bool initialized = init(ust, window, renderer);
+
+    if (!initialized) {
+        std::cout << "Wyst¹pi³ b³¹d przy inicjalizacji programu" << std::endl;
+        return 0;
+    }
+
+    // ------------------------------------------------------
+    // Poni¿ej tego, wszystko do testów
 
     SDL_Surface* screenSurface = NULL;
 
@@ -40,62 +47,66 @@ int main(int argc, char* argv[])
     //Event handler
     SDL_Event e;
 
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        printf("SDL could not initialize! SDL_Eroor: %s\n", SDL_GetError());
-    }
-    else
+    //Get window surface
+    screenSurface = SDL_GetWindowSurface(window);
+
+    gHelloWorld = SDL_LoadBMP("resources/hello_world.bmp");
+    optimizedSurface = SDL_ConvertSurface(gHelloWorld, screenSurface->format, 0);
+    SDL_FreeSurface(gHelloWorld);
+    if (gHelloWorld == NULL)
     {
-        window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ust.SCREEN_WIDTH, ust.SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-        if (window == NULL) {
-            printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-        }
-        else
-        {
-            //Get window surface
-            screenSurface = SDL_GetWindowSurface(window);
-
-            gHelloWorld = SDL_LoadBMP("resources/hello_world.bmp");
-            optimizedSurface = SDL_ConvertSurface(gHelloWorld, screenSurface->format, 0);
-            SDL_FreeSurface(gHelloWorld);
-            if (gHelloWorld == NULL)
-            {
-                printf("Unable to load image %s! SDL Error: %s\n", "resources/hello_world.bmp", SDL_GetError());
-            }
-            SDL_Rect stretchRect;
-            stretchRect.x = 0;
-            stretchRect.y = 0;
-            stretchRect.w = ust.SCREEN_WIDTH;
-            stretchRect.h = ust.SCREEN_HEIGHT;
-            SDL_BlitScaled(optimizedSurface, NULL, screenSurface, &stretchRect);
-            SDL_UpdateWindowSurface(window);
-
-            //Hack to get window to stay up
-        }
+        printf("Unable to load image %s! SDL Error: %s\n", "resources/hello_world.bmp", SDL_GetError());
     }
+    SDL_Rect stretchRect;
+    stretchRect.x = 0;
+    stretchRect.y = 0;
+    stretchRect.w = ust.SCREEN_WIDTH;
+    stretchRect.h = ust.SCREEN_HEIGHT;
+    SDL_BlitScaled(optimizedSurface, NULL, screenSurface, &stretchRect);
+    SDL_UpdateWindowSurface(window);
+
     exit = SDL_LoadBMP("resources/exit.bmp");
     //Apply the image
     SDL_BlitSurface(exit, NULL, screenSurface, NULL);
-
     //Update the surface
     SDL_UpdateWindowSurface(window);
+
+    // -----------------------------------------------------------------------------------
+    auto stachu_tekstura = new LTexture();
+    stachu_tekstura->loadFromFile(renderer, "resources/rendertest.bmp");
+
+    auto stachu = new Hero(stachu_tekstura);
+    // -----------------------------------------------------------------------------------
+
     while (!quit)
     {
         while (SDL_PollEvent(&e) != 0)
         {
             //User requests quit
-            if (e.type == SDL_KEYDOWN)
+            if (e.type == SDL_QUIT)
             {
                 quit = true;
             }
+
+            stachu->handleEvent(e);
         }
+
+        // -----------------------------------------------------------------------------------
+
+        stachu->move();
+
+
+        SDL_RenderClear(renderer); //wyczysc
+
+        stachu->render(renderer); //zrenderuj
+
+        SDL_RenderPresent(renderer); //update
+        
+
+        // -----------------------------------------------------------------------------------
     }
 
-    //Potem siê chyba nie u¿ywa surface wiêc jeszcze tu zostawiam
-    
-
-    SDL_DestroyWindow(window);
-    window = nullptr;
-    SDL_Quit();
+    close(window, renderer);
 
     return 0;
 }

@@ -5,8 +5,8 @@ class UST
 {
 public:
 
-    const int SCREEN_WIDTH = 640;
-    const int SCREEN_HEIGHT = 480;
+    const int SCREEN_WIDTH = 1700;
+    const int SCREEN_HEIGHT = 800;
 
 private:
 	UST() {}

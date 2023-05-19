@@ -32,6 +32,9 @@
     <Image Include="resources\hello_world.bmp">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="resources\rendertest.bmp">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\Hero.h">
@@ -44,6 +47,9 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="lib\ustawienia.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\close.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>

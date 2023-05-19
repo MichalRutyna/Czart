@@ -83,3 +83,13 @@ void LTexture::render(SDL_Renderer* renderer, int x, int y, SDL_Rect* clip, doub
     //Render to screen
     SDL_RenderCopyEx(renderer, mTexture, clip, &renderQuad, angle, center, flip);
 }
+
+int LTexture::width()
+{
+    return mWidth;
+}
+
+int LTexture::height()
+{
+    return mHeight;
+}
