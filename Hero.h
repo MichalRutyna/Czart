@@ -15,10 +15,10 @@ private:
     const int VELOCITY;
 
     // Faktyczne pozycje
-    int memberPosX, memberPosY;
+    int mPosX, mPosY;
 
     // Aktualna prędkość
-    int memberVelX, memberVelY;
+    int mVelX, mVelY;
 
 public:
     Hero();
