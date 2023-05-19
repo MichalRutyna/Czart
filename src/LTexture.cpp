@@ -1,4 +1,4 @@
-﻿#include "LTexture.h"
+﻿#include "../lib/LTexture.h"
 
 LTexture::LTexture()
 {

@@ -18,14 +18,14 @@ bool init(UST& ust, SDL_Window* window, SDL_Renderer* renderer)
 
     // Tworzenie okna
     window = SDL_CreateWindow("Czart", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ust.SCREEN_WIDTH, ust.SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-    if (window = NULL) {
+    if (window == NULL) {
         std::cout << "Nie mozna stworzyc okna, SDL Error: " << SDL_GetError();
         return false;
     }
 
     // Tworzenie renderatora z vsynciem
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    if (renderer = NULL) {
+    if (renderer == NULL) {
         std::cout << "Nie mozna zainicjalizowac renderatora, SDL Error: " << SDL_GetError();
         return false;
     }

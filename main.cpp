@@ -1,8 +1,8 @@
 #include <SDL.h>
 // #include <SDL_image.h>
-#include "ustawienia.h"
-#include "ustawienia.h"
-#include "Hero.h"
+#include "lib/ustawienia.h"
+#include "lib/ustawienia.h"
+#include "lib/Hero.h"
 
 #include <iostream>
 #include <vector>
@@ -54,12 +54,12 @@ int main(int argc, char* argv[])
             //Get window surface
             screenSurface = SDL_GetWindowSurface(window);
 
-            gHelloWorld = SDL_LoadBMP("hello_world.bmp");
+            gHelloWorld = SDL_LoadBMP("resources/hello_world.bmp");
             optimizedSurface = SDL_ConvertSurface(gHelloWorld, screenSurface->format, 0);
             SDL_FreeSurface(gHelloWorld);
             if (gHelloWorld == NULL)
             {
-                printf("Unable to load image %s! SDL Error: %s\n", "hello_world.bmp", SDL_GetError());
+                printf("Unable to load image %s! SDL Error: %s\n", "resources/hello_world.bmp", SDL_GetError());
             }
             SDL_Rect stretchRect;
             stretchRect.x = 0;
@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
             //Hack to get window to stay up
         }
     }
-    exit = SDL_LoadBMP("exit.bmp");
+    exit = SDL_LoadBMP("resources/exit.bmp");
     //Apply the image
     SDL_BlitSurface(exit, NULL, screenSurface, NULL);
 

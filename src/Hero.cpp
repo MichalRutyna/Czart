@@ -1,4 +1,4 @@
-#include "Hero.h"
+#include "../lib/Hero.h"
 
 UST& Ust = UST::pobierz_ustawienia();
 
