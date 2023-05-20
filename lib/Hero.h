@@ -21,7 +21,7 @@ private:
     // Aktualna prędkość
     int mVelX, mVelY;
 
-    LTexture* tekstura;
+    textureType tekstura;
 
 public:
     Hero(textureType);
