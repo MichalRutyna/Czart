@@ -18,9 +18,8 @@ int main(int argc, char* argv[])
 {
     UST& ust = UST::pobierz_ustawienia();
 
-    SDL_Window* window = nullptr;
-    
-    SDL_Renderer* renderer = nullptr;
+    windowType window;
+    rendererType renderer;
 
 
     bool initialized = init(ust, window, renderer);
@@ -48,7 +47,7 @@ int main(int argc, char* argv[])
     SDL_Event e;
 
     //Get window surface
-    screenSurface = SDL_GetWindowSurface(window);
+    screenSurface = SDL_GetWindowSurface(window.get());
 
     gHelloWorld = SDL_LoadBMP("resources/hello_world.bmp");
     optimizedSurface = SDL_ConvertSurface(gHelloWorld, screenSurface->format, 0);
@@ -63,13 +62,13 @@ int main(int argc, char* argv[])
     stretchRect.w = ust.SCREEN_WIDTH;
     stretchRect.h = ust.SCREEN_HEIGHT;
     SDL_BlitScaled(optimizedSurface, NULL, screenSurface, &stretchRect);
-    SDL_UpdateWindowSurface(window);
+    SDL_UpdateWindowSurface(window.get());
 
     exit = SDL_LoadBMP("resources/exit.bmp");
     //Apply the image
     SDL_BlitSurface(exit, NULL, screenSurface, NULL);
     //Update the surface
-    SDL_UpdateWindowSurface(window);
+    SDL_UpdateWindowSurface(window.get());
 
     // -----------------------------------------------------------------------------------
     auto stachu_tekstura = new LTexture();
@@ -96,17 +95,17 @@ int main(int argc, char* argv[])
         stachu->move();
 
 
-        SDL_RenderClear(renderer); //wyczysc
+        SDL_RenderClear(renderer.get()); //wyczysc
 
         stachu->render(renderer); //zrenderuj
 
-        SDL_RenderPresent(renderer); //update
+        SDL_RenderPresent(renderer.get()); //update
         
 
         // -----------------------------------------------------------------------------------
     }
 
-    close(window, renderer);
+    close();
 
     return 0;
 }

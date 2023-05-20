@@ -51,7 +51,7 @@ void Hero::move()
 	}
 }
 
-void Hero::render(SDL_Renderer* renderer)
+void Hero::render(rendererType& renderer)
 {
 	tekstura->render(renderer, mPosX, mPosY);
 }

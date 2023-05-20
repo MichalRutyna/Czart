@@ -1,6 +1,14 @@
 ﻿#ifndef USTAWIENIA
 #define USTAWIENIA
 
+#include <SDL.h>
+#include <memory>
+
+#include "destruktory.h"
+
+typedef std::unique_ptr<SDL_Window, WindowDeletor> windowType;
+typedef std::unique_ptr<SDL_Renderer, RendererDeletor> rendererType;
+
 class UST
 {
 public:

@@ -4,17 +4,19 @@
 #include <string>
 #include <SDL.h>
 
+#include "ustawienia.h"
+
 class LTexture 
 {
 public:
 	LTexture();
 	~LTexture();
 
-	void free();
+	void mfree();
 
-	bool loadFromFile(SDL_Renderer * renderer, std::string path);
+	bool loadFromFile(rendererType& renderer, std::string path);
 
-	void render(SDL_Renderer* renderer, int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	void render(rendererType& renderer, int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	int width();
 	int height();

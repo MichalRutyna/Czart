@@ -30,7 +30,7 @@ public:
 
     void move();
 
-    void render(SDL_Renderer*);
+    void render(rendererType&);
 };
 
 #endif
