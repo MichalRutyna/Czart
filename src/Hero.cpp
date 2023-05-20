@@ -2,7 +2,7 @@
 
 UST& Ust = UST::pobierz_ustawienia();
 
-Hero::Hero(LTexture* tekstura) : WIDTH(tekstura->width()), HEIGHT(tekstura->height()), NAME("Stachu Jones"), VELOCITY(10), tekstura(tekstura)
+Hero::Hero(textureType tekstura) : WIDTH(tekstura->width()), HEIGHT(tekstura->height()), NAME("Stachu Jones"), VELOCITY(10), tekstura(tekstura)
 {
 	mPosX = 0;
 	mPosY = 0;

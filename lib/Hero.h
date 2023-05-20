@@ -24,7 +24,7 @@ private:
     LTexture* tekstura;
 
 public:
-    Hero(LTexture*);
+    Hero(textureType);
 
     void handleEvent(SDL_Event&);
 

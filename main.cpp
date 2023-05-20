@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
     SDL_UpdateWindowSurface(window.get());
 
     // -----------------------------------------------------------------------------------
-    auto stachu_tekstura = new LTexture();
+    auto stachu_tekstura = std::make_shared<LTexture>();
     stachu_tekstura->loadFromFile(renderer, "resources/rendertest.bmp");
 
     auto stachu = new Hero(stachu_tekstura);

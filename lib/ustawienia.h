@@ -5,9 +5,12 @@
 #include <memory>
 
 #include "destruktory.h"
+#include "LTexture.h"
 
 typedef std::unique_ptr<SDL_Window, WindowDeletor> windowType;
 typedef std::unique_ptr<SDL_Renderer, RendererDeletor> rendererType;
+
+typedef std::shared_ptr<LTexture> textureType;
 
 class UST
 {
