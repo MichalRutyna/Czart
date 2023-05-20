@@ -34,24 +34,43 @@ void Hero::handleEvent( SDL_Event& e )
 	}
 }
 
-void Hero::move()
+void Hero::move() //szpara sie robi przez rozdzielczosc teksturki i rozdzielczosc monitora xd
 {
 	mPosX += mVelX;
 	
-	if( (mPosX < 0) || (mPosX + WIDTH > Ust.SCREEN_WIDTH) )
+	if( (mPosX < 0) || (mPosX + WIDTH > Ust.LEVEL_WIDTH) )
 	{
 		mPosX -= mVelX;
 	}
-
 	mPosY += mVelY;
 
-	if ((mPosY < 0) || (mPosY + HEIGHT > Ust.SCREEN_HEIGHT))
+	if ((mPosY < 0) || (mPosY + HEIGHT > Ust.LEVEL_HEIGHT))
 	{
 		mPosY -= mVelY;
 	}
 }
 
-void Hero::render(rendererType& renderer)
+void Hero::render(rendererType& renderer, int camX, int camY)
 {
-	tekstura->render(renderer, mPosX, mPosY);
+	tekstura->render(renderer, mPosX - camX, mPosY - camY);
+}
+
+int Hero::getPosX()
+{
+	return mPosX;
+}
+
+int Hero::getPosY()
+{
+	return mPosY;
+}
+
+int Hero::heroWidth()
+{
+	return WIDTH;
+}
+
+int Hero::heroHeight()
+{
+	return HEIGHT;
 }

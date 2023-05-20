@@ -23,9 +23,32 @@ void LTexture::mfree()
         mHeight = 0;
     }
 }
+SDL_Surface* ScaledCopy(SDL_Surface* src, SDL_Rect* dstSize)
+{
+	SDL_Surface* scaledCopy(SDL_CreateRGBSurface(0,
+		dstSize->w, dstSize->h,
+		src->format->BitsPerPixel,
+		src->format->Rmask, src->format->Gmask, src->format->Bmask, src->format->Amask));
 
+	// Get the old mode
+	SDL_BlendMode oldBlendMode;
+	SDL_GetSurfaceBlendMode(src, &oldBlendMode);
 
-bool LTexture::loadFromFile(rendererType& renderer, std::string path)
+	// Set the new mode so copying the source won't change the source
+	SDL_SetSurfaceBlendMode(src, SDL_BLENDMODE_NONE);
+
+	// Do the copy
+	if (SDL_BlitScaled(src, NULL, scaledCopy, dstSize) != 0)
+	{
+        exit(1);
+	}
+
+	// Restore the original blending mode
+	SDL_SetSurfaceBlendMode(src, oldBlendMode);
+	return scaledCopy;
+}
+
+bool LTexture::loadFromFile(rendererType& renderer, std::string path, int scaled_width, int scaled_height)
 {
     //Get rid of preexisting texture
     mfree();
@@ -33,19 +56,33 @@ bool LTexture::loadFromFile(rendererType& renderer, std::string path)
     //The final texture
     SDL_Texture* newTexture = NULL;
 
+	SDL_Surface * stretchedSurface = new SDL_Surface();
+
     //Load image at specified path
-    SDL_Surface* loadedSurface = SDL_LoadBMP(path.c_str());
+    SDL_Surface* loadedSurface = IMG_Load(path.c_str());
     if (loadedSurface == NULL)
     {
         printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), SDL_GetError());
     }
     else
     {
+        if(scaled_width != -1 && scaled_height != -1)
+        {
+            SDL_Rect* stretchRect = new SDL_Rect();
+            stretchRect->x = 0;
+            stretchRect->y = 0;
+            stretchRect->w = scaled_width;
+            stretchRect->h = scaled_height;
+
+            stretchedSurface = ScaledCopy(loadedSurface, stretchRect);
+        }
+        else stretchedSurface = loadedSurface;
+
         //Color key image
-        SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
+        SDL_SetColorKey(stretchedSurface, SDL_TRUE, SDL_MapRGB(stretchedSurface->format, 0, 0xFF, 0xFF)); //Wycina kolor cyjanowy
 
         //Create texture from surface pixels
-        newTexture = SDL_CreateTextureFromSurface(renderer.get(), loadedSurface);
+        newTexture = SDL_CreateTextureFromSurface(renderer.get(), stretchedSurface);
         if (newTexture == NULL)
         {
             printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
@@ -53,12 +90,12 @@ bool LTexture::loadFromFile(rendererType& renderer, std::string path)
         else
         {
             //Get image dimensions
-            mWidth = loadedSurface->w;
-            mHeight = loadedSurface->h;
+            mWidth = stretchedSurface->w;
+            mHeight = stretchedSurface->h;
         }
 
         //Get rid of old loaded surface
-        SDL_FreeSurface(loadedSurface);
+        SDL_FreeSurface(stretchedSurface);
     }
 
     //Return success
@@ -81,6 +118,15 @@ void LTexture::render(rendererType& renderer, int x, int y, SDL_Rect* clip, doub
     //Render to screen
     SDL_RenderCopyEx(renderer.get(), mTexture, clip, &renderQuad, angle, center, flip);
 }
+
+void LTexture::setColor(uint8_t red, uint8_t green, uint8_t blue){
+    // Modulacja koloru tekstury
+    SDL_SetTextureColorMod(mTexture, red, green, blue);
+}
+
+void SetBlendMode(SDL_BlendMode blending);
+
+void setAlpha(uint8_t alpha);
 
 int LTexture::width()
 {

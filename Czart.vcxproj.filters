@@ -24,15 +24,15 @@
     <ClCompile Include="src\LTexture.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="src\LTimer.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\exit.bmp">
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="resources\hello_world.bmp">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="resources\rendertest.bmp">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>
@@ -53,6 +53,9 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="lib\destruktory.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\LTimer.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>

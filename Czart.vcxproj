@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\LTimer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Hero.cpp" />
     <ClCompile Include="src\LTexture.cpp" />
@@ -140,7 +141,6 @@
   <ItemGroup>
     <Image Include="resources\exit.bmp" />
     <Image Include="resources\hello_world.bmp" />
-    <Image Include="resources\rendertest.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\close.h" />
@@ -149,6 +149,7 @@
     <ClInclude Include="lib\init.h" />
     <ClInclude Include="lib\LTexture.h" />
     <ClInclude Include="lib\ustawienia.h" />
+    <ClInclude Include="lib\LTimer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

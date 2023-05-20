@@ -16,9 +16,10 @@ typedef std::shared_ptr<LTexture> textureType;
 class UST
 {
 public:
-
-    const int SCREEN_WIDTH = 1700;
+    const int SCREEN_WIDTH = 1600;
     const int SCREEN_HEIGHT = 800;
+	const int LEVEL_WIDTH = 8000;
+	const int LEVEL_HEIGHT = 8000;
 
 private:
 	UST() {}

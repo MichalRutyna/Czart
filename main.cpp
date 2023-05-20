@@ -72,9 +72,14 @@ int main(int argc, char* argv[])
 
     // -----------------------------------------------------------------------------------
     auto stachu_tekstura = std::make_shared<LTexture>();
-    stachu_tekstura->loadFromFile(renderer, "resources/rendertest.bmp");
+    stachu_tekstura->loadFromFile(renderer, "resources/rendertest.png");
 
     auto stachu = new Hero(stachu_tekstura);
+    // -----------------------------------------------------------------------------------
+    auto background = std::make_shared<LTexture>();
+    background->loadFromFile(renderer, "resources/background.png");
+    // -----------------------------------------------------------------------------------
+    SDL_Rect camera = {0, 0, ust.SCREEN_WIDTH, ust.SCREEN_HEIGHT };
     // -----------------------------------------------------------------------------------
 
     while (!quit)
@@ -92,12 +97,33 @@ int main(int argc, char* argv[])
 
         // -----------------------------------------------------------------------------------
 
-        stachu->move();
+        stachu->move(); //przesun 
 
+        camera.x = (stachu->getPosX() + stachu->heroWidth() / 2) - ust.SCREEN_WIDTH / 2; //przesun kamere na stacha
+        camera.y = (stachu->getPosY() + stachu->heroHeight() / 2) - ust.SCREEN_HEIGHT / 2;
+
+        if (camera.x < 0)
+        {
+            camera.x = 0;
+        }
+        if (camera.y < 0)
+        {
+            camera.y = 0;
+        }
+        if (camera.x > ust.LEVEL_WIDTH - camera.w)
+        {
+            camera.x = ust.LEVEL_WIDTH - camera.w;
+        }
+        if (camera.y > ust.LEVEL_HEIGHT - camera.h)
+        {
+            camera.y = ust.LEVEL_HEIGHT - camera.h;
+        }
 
         SDL_RenderClear(renderer.get()); //wyczysc
 
-        stachu->render(renderer); //zrenderuj
+        background->render(renderer, 0, 0, &camera); //tlo
+
+        stachu->render(renderer, camera.x, camera.y); //zrenderuj
 
         SDL_RenderPresent(renderer.get()); //update
         

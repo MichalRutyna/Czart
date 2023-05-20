@@ -30,7 +30,13 @@ public:
 
     void move();
 
-    void render(rendererType&);
+    void render(rendererType&, int camX, int camY);
+
+    int getPosX();
+    int getPosY();
+
+    int heroWidth();
+    int heroHeight();
 };
 
 #endif
