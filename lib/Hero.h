@@ -17,6 +17,7 @@ private:
 
     // Faktyczne pozycje
     double mPosX, mPosY;
+    double oldX, oldY;
 
     // Aktualna prędkość
     double mVelX, mVelY;
@@ -28,7 +29,9 @@ public:
 
     void handleEvent(SDL_Event&);
 
-    void move(int timeStep, double alpha);
+    void move_step(int timeStep);
+
+    void move(double alpha);
 
     void render(rendererType&, int camX, int camY);
 

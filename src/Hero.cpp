@@ -9,6 +9,9 @@ Hero::Hero(textureType tekstura) : mWIDTH(tekstura->width()), mHEIGHT(tekstura->
 
 	mVelX = 0;
 	mVelY = 0;
+
+	oldX = mPosX;
+	oldY = mPosY;
 }
 
 void Hero::handleEvent( SDL_Event& e )
@@ -34,34 +37,38 @@ void Hero::handleEvent( SDL_Event& e )
 	}
 }
 
-void Hero::move(int timeStep_ms, double alpha)
-{	
-	double newX = mPosX, newY = mPosY;
+void Hero::move_step(int timeStep_ms)
+{
+	oldX = mPosX;
+	oldY = mPosY;
 
-	newX += mVelX * timeStep_ms;
+	mPosX += mVelX * timeStep_ms;
 	
-	if (newX < 0)
+	if (mPosX < 0)
 	{
-		newX = 0;
+		mPosX = 0;
 	}
-	else if (newX + mWIDTH > ust.LEVEL_WIDTH)
+	else if (mPosX + mWIDTH > ust.LEVEL_WIDTH)
 	{
-		newX = static_cast<double>(ust.LEVEL_WIDTH - mWIDTH);
-	}
-
-	newY += mVelY * timeStep_ms;
-
-	if (newY < 0)
-	{
-		newY = 0;
-	}
-	else if (newY + mHEIGHT > ust.LEVEL_HEIGHT)
-	{
-		newY = static_cast<double>(ust.LEVEL_HEIGHT - mHEIGHT);
+		mPosX = static_cast<double>(ust.LEVEL_WIDTH - mWIDTH);
 	}
 
-	mPosX = (mPosX * alpha) + (newX * (1.0 - alpha));
-	mPosY = (mPosY * alpha) + (newY * (1.0 - alpha));
+	mPosY += mVelY * timeStep_ms;
+
+	if (mPosY < 0)
+	{
+		mPosY = 0;
+	}
+	else if (mPosY + mHEIGHT > ust.LEVEL_HEIGHT)
+	{
+		mPosY = static_cast<double>(ust.LEVEL_HEIGHT - mHEIGHT);
+	}
+}
+
+void Hero::move(double alpha)
+{
+	mPosY = (mPosY * alpha) + (oldY * (1.0 - alpha));
+	mPosX = (mPosX * alpha) + (oldX * (1.0 - alpha));
 }
 
 void Hero::render(rendererType& renderer, int camX, int camY)
