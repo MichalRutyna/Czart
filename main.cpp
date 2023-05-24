@@ -7,6 +7,7 @@
 
 #include "lib/Hero.h"
 #include "lib/LTexture.h"
+#include "lib/LTimer.h"
 
 #include <iostream>
 #include <vector>
@@ -72,14 +73,17 @@ int main(int argc, char* argv[])
 
     // -----------------------------------------------------------------------------------
     auto stachu_tekstura = std::make_shared<LTexture>();
-    stachu_tekstura->loadFromFile(renderer, "resources/rendertest.png");
+    stachu_tekstura->loadFromFile(renderer, "resources/rendertest.png", 300, 100);
 
-    auto stachu = new Hero(stachu_tekstura);
+    auto stachu = std::make_shared<Hero>(stachu_tekstura);
     // -----------------------------------------------------------------------------------
     auto background = std::make_shared<LTexture>();
     background->loadFromFile(renderer, "resources/background.png");
     // -----------------------------------------------------------------------------------
-    SDL_Rect camera = {0, 0, ust.SCREEN_WIDTH, ust.SCREEN_HEIGHT };
+    SDL_Rect camera = {0.0f, 0.0f, ust.SCREEN_WIDTH, ust.SCREEN_HEIGHT };
+    // -----------------------------------------------------------------------------------
+    auto frame_timer = std::make_shared<LTimer>();
+    uint64_t accumulator = 0;
     // -----------------------------------------------------------------------------------
 
     while (!quit)
@@ -96,11 +100,21 @@ int main(int argc, char* argv[])
         }
 
         // -----------------------------------------------------------------------------------
+        accumulator += frame_timer->getTicks();
+        frame_timer->start();
 
-        stachu->move(); //przesun 
+        while (accumulator >= ust.DT)
+        {
+            // Tu trzeba zrobiæ w³aœciwie listê wszystkiego co ma siê ruszaæ (zgodnie z fizyk¹, kamera chyba nie musi)
+            stachu->move(ust.DT);
+            accumulator -= ust.DT;
+        }
+        
+        // -----------------------------------------------------------------------------------
 
-        camera.x = (stachu->getPosX() + stachu->heroWidth() / 2) - ust.SCREEN_WIDTH / 2; //przesun kamere na stacha
-        camera.y = (stachu->getPosY() + stachu->heroHeight() / 2) - ust.SCREEN_HEIGHT / 2;
+
+        camera.x = (stachu->getPosX() + stachu->width() / 2) - ust.SCREEN_WIDTH / 2; //przesun kamere na stacha
+        camera.y = (stachu->getPosY() + stachu->height() / 2) - ust.SCREEN_HEIGHT / 2;
 
         if (camera.x < 0)
         {
@@ -130,7 +144,6 @@ int main(int argc, char* argv[])
 
         // -----------------------------------------------------------------------------------
     }
-
     close();
 
     return 0;

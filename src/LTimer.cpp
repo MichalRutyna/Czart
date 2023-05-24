@@ -35,7 +35,7 @@ void LTimer::pause()
 	{
 		mPaused = true;
 
-		mPausedTicks = SDL_GetTicks() - mStartTicks;
+		mPausedTicks = SDL_GetTicks64() - mStartTicks;
 		mStartTicks = 0;
 	}
 }
@@ -46,21 +46,21 @@ void LTimer::unpause()
 	{
 		mPaused = false;
 
-		mStartTicks = SDL_GetTicks() - mPausedTicks;
+		mStartTicks = SDL_GetTicks64() - mPausedTicks;
 		mPausedTicks = 0;
 	}
 }
 
-uint32_t LTimer::getTicks()
+uint64_t LTimer::getTicks()
 {
-	uint32_t time = 0;
+	uint64_t time = 0;
 
 	if (mStarted)
 	{
 		if (!mPaused)
 		{
 			// zwróć aktualny czas - czas kiedy rozpoczęto
-			time = SDL_GetTicks() - mStartTicks;
+			time = SDL_GetTicks64() - mStartTicks;
 		}
 		else
 		{

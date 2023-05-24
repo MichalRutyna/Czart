@@ -20,7 +20,8 @@ public:
     const int SCREEN_HEIGHT = 800;
 	const int LEVEL_WIDTH = 8000;
 	const int LEVEL_HEIGHT = 8000;
-
+	const int DT = 7;
+	const float VELOCITY_MULTIPLIER = 1;
 private:
 	UST() {}
 	UST(const UST&);

@@ -9,6 +9,7 @@ LTexture::LTexture()
 
 LTexture::~LTexture()
 {
+    std::cout << "Usunieto teksture o wymiarach " << mWidth << "x" << mHeight << std::endl;
     mfree();
 }
 
@@ -124,9 +125,13 @@ void LTexture::setColor(uint8_t red, uint8_t green, uint8_t blue){
     SDL_SetTextureColorMod(mTexture, red, green, blue);
 }
 
-void SetBlendMode(SDL_BlendMode blending);
+void LTexture::SetBlendMode(SDL_BlendMode blending) {
+    SDL_SetTextureBlendMode(mTexture, blending);
+}
 
-void setAlpha(uint8_t alpha);
+void LTexture::setAlpha(uint8_t alpha) {
+    SDL_SetTextureAlphaMod(mTexture, alpha);
+}
 
 int LTexture::width()
 {

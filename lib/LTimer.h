@@ -14,17 +14,17 @@ public:
 	void pause();
 	void unpause();
 
-	uint32_t getTicks();
+	uint64_t getTicks();
 
 	bool isStarted();
 	bool isPaused();
 
 private:
 	// snapshot z wystartowania
-	uint32_t mStartTicks;
+	uint64_t mStartTicks;
 
 	// snapshot z zapauzowania
-	uint32_t mPausedTicks;
+	uint64_t mPausedTicks;
 
 	bool mPaused;
 	bool mStarted;

@@ -1,8 +1,8 @@
 #include "../lib/Hero.h"
 
-UST& Ust = UST::pobierz_ustawienia();
+UST& ust = UST::pobierz_ustawienia();
 
-Hero::Hero(textureType tekstura) : WIDTH(tekstura->width()), HEIGHT(tekstura->height()), NAME("Stachu Jones"), VELOCITY(10), tekstura(tekstura)
+Hero::Hero(textureType tekstura) : mWIDTH(tekstura->width()), mHEIGHT(tekstura->height()), NAME("Stachu Jones"), VELOCITY((float)(0.5)* ust.VELOCITY_MULTIPLIER), tekstura(tekstura)
 {
 	mPosX = 0;
 	mPosY = 0;
@@ -34,43 +34,52 @@ void Hero::handleEvent( SDL_Event& e )
 	}
 }
 
-void Hero::move() //szpara sie robi przez rozdzielczosc teksturki i rozdzielczosc monitora xd
+void Hero::move(int timeStep_ms)
 {
-	mPosX += mVelX;
+	mPosX += mVelX * timeStep_ms;
 	
-	if( (mPosX < 0) || (mPosX + WIDTH > Ust.LEVEL_WIDTH) )
+	if (mPosX < 0)
 	{
-		mPosX -= mVelX;
+		mPosX = 0;
 	}
-	mPosY += mVelY;
-
-	if ((mPosY < 0) || (mPosY + HEIGHT > Ust.LEVEL_HEIGHT))
+	else if (mPosX + mWIDTH > ust.LEVEL_WIDTH)
 	{
-		mPosY -= mVelY;
+		mPosX = static_cast<int>(ust.LEVEL_WIDTH - mWIDTH);
+	}
+
+	mPosY += mVelY * timeStep_ms;
+
+	if (mPosY < 0)
+	{
+		mPosY = 0;
+	}
+	else if (mPosY + mHEIGHT > ust.LEVEL_HEIGHT)
+	{
+		mPosY = static_cast<int>(ust.LEVEL_HEIGHT - mHEIGHT);
 	}
 }
 
 void Hero::render(rendererType& renderer, int camX, int camY)
 {
-	tekstura->render(renderer, mPosX - camX, mPosY - camY);
+	tekstura->render(renderer, static_cast<int>(mPosX - camX), static_cast<int>(mPosY - camY));
 }
 
-int Hero::getPosX()
+float Hero::getPosX()
 {
 	return mPosX;
 }
 
-int Hero::getPosY()
+float Hero::getPosY()
 {
 	return mPosY;
 }
 
-int Hero::heroWidth()
+int Hero::width()
 {
-	return WIDTH;
+	return mWIDTH;
 }
 
-int Hero::heroHeight()
+int Hero::height()
 {
-	return HEIGHT;
+	return mHEIGHT;
 }

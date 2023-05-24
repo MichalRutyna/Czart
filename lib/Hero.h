@@ -8,18 +8,18 @@
 
 class Hero{
 private:
-    const int WIDTH;
-    const int HEIGHT;
+    const int mWIDTH;
+    const int mHEIGHT;
     const std::string NAME;
 
     // Bardziej przyśpiesznie
-    const int VELOCITY;
+    const float VELOCITY;
 
     // Faktyczne pozycje
-    int mPosX, mPosY;
+    float mPosX, mPosY;
 
     // Aktualna prędkość
-    int mVelX, mVelY;
+    float mVelX, mVelY;
 
     textureType tekstura;
 
@@ -28,15 +28,15 @@ public:
 
     void handleEvent(SDL_Event&);
 
-    void move();
+    void move(int timeStep);
 
     void render(rendererType&, int camX, int camY);
 
-    int getPosX();
-    int getPosY();
+    float getPosX();
+    float getPosY();
 
-    int heroWidth();
-    int heroHeight();
+    int width();
+    int height();
 };
 
 #endif

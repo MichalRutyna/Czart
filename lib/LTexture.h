@@ -12,7 +12,7 @@ class LTexture
 {
 public:
 	LTexture();
-	~LTexture();
+	virtual ~LTexture();
 
 	void mfree();
 
