@@ -13,13 +13,13 @@ private:
     const std::string NAME;
 
     // Bardziej przyśpiesznie
-    const float VELOCITY;
+    const double VELOCITY;
 
     // Faktyczne pozycje
-    float mPosX, mPosY;
+    double mPosX, mPosY;
 
     // Aktualna prędkość
-    float mVelX, mVelY;
+    double mVelX, mVelY;
 
     textureType tekstura;
 
@@ -28,12 +28,12 @@ public:
 
     void handleEvent(SDL_Event&);
 
-    void move(int timeStep);
+    void move(int timeStep, double alpha);
 
     void render(rendererType&, int camX, int camY);
 
-    float getPosX();
-    float getPosY();
+    double getPosX();
+    double getPosY();
 
     int width();
     int height();

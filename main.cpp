@@ -106,9 +106,12 @@ int main(int argc, char* argv[])
         while (accumulator >= ust.DT)
         {
             // Tu trzeba zrobiæ w³aœciwie listê wszystkiego co ma siê ruszaæ (zgodnie z fizyk¹, kamera chyba nie musi)
-            stachu->move(ust.DT);
+            stachu->move(ust.DT, 0.0);
             accumulator -= ust.DT;
         }
+        static_cast<long>(accumulator);
+        double alpha = static_cast<double>(accumulator) / ust.DT;
+        stachu->move(ust.DT, alpha);
         
         // -----------------------------------------------------------------------------------
 

@@ -2,7 +2,7 @@
 
 UST& ust = UST::pobierz_ustawienia();
 
-Hero::Hero(textureType tekstura) : mWIDTH(tekstura->width()), mHEIGHT(tekstura->height()), NAME("Stachu Jones"), VELOCITY((float)(0.5)* ust.VELOCITY_MULTIPLIER), tekstura(tekstura)
+Hero::Hero(textureType tekstura) : mWIDTH(tekstura->width()), mHEIGHT(tekstura->height()), NAME("Stachu Jones"), VELOCITY(0.5 * ust.VELOCITY_MULTIPLIER), tekstura(tekstura)
 {
 	mPosX = 0;
 	mPosY = 0;
@@ -34,29 +34,34 @@ void Hero::handleEvent( SDL_Event& e )
 	}
 }
 
-void Hero::move(int timeStep_ms)
-{
-	mPosX += mVelX * timeStep_ms;
+void Hero::move(int timeStep_ms, double alpha)
+{	
+	double newX = mPosX, newY = mPosY;
+
+	newX += mVelX * timeStep_ms;
 	
-	if (mPosX < 0)
+	if (newX < 0)
 	{
-		mPosX = 0;
+		newX = 0;
 	}
-	else if (mPosX + mWIDTH > ust.LEVEL_WIDTH)
+	else if (newX + mWIDTH > ust.LEVEL_WIDTH)
 	{
-		mPosX = static_cast<int>(ust.LEVEL_WIDTH - mWIDTH);
+		newX = static_cast<double>(ust.LEVEL_WIDTH - mWIDTH);
 	}
 
-	mPosY += mVelY * timeStep_ms;
+	newY += mVelY * timeStep_ms;
 
-	if (mPosY < 0)
+	if (newY < 0)
 	{
-		mPosY = 0;
+		newY = 0;
 	}
-	else if (mPosY + mHEIGHT > ust.LEVEL_HEIGHT)
+	else if (newY + mHEIGHT > ust.LEVEL_HEIGHT)
 	{
-		mPosY = static_cast<int>(ust.LEVEL_HEIGHT - mHEIGHT);
+		newY = static_cast<double>(ust.LEVEL_HEIGHT - mHEIGHT);
 	}
+
+	mPosX = (mPosX * alpha) + (newX * (1.0 - alpha));
+	mPosY = (mPosY * alpha) + (newY * (1.0 - alpha));
 }
 
 void Hero::render(rendererType& renderer, int camX, int camY)
@@ -64,12 +69,12 @@ void Hero::render(rendererType& renderer, int camX, int camY)
 	tekstura->render(renderer, static_cast<int>(mPosX - camX), static_cast<int>(mPosY - camY));
 }
 
-float Hero::getPosX()
+double Hero::getPosX()
 {
 	return mPosX;
 }
 
-float Hero::getPosY()
+double Hero::getPosY()
 {
 	return mPosY;
 }
