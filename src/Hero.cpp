@@ -12,6 +12,9 @@ Hero::Hero(textureType tekstura) : mWIDTH(tekstura->width()), mHEIGHT(tekstura->
 
 	oldX = mPosX;
 	oldY = mPosY;
+
+	newX = mPosX;
+	newY = mPosY;
 }
 
 void Hero::handleEvent( SDL_Event& e )
@@ -65,25 +68,25 @@ void Hero::move_step(int timeStep_ms)
 	}
 }
 
-void Hero::move(double alpha)
+void Hero::move(double timestep_alpha)
 {
-	mPosY = (mPosY * alpha) + (oldY * (1.0 - alpha));
-	mPosX = (mPosX * alpha) + (oldX * (1.0 - alpha));
+	newX = (mPosX * timestep_alpha) + (oldX * (1.0 - timestep_alpha));
+	newY = (mPosY * timestep_alpha) + (oldY * (1.0 - timestep_alpha));
 }
 
 void Hero::render(rendererType& renderer, int camX, int camY)
 {
-	tekstura->render(renderer, static_cast<int>(mPosX - camX), static_cast<int>(mPosY - camY));
+	tekstura->render(renderer, static_cast<int>(newX - camX), static_cast<int>(newY - camY));
 }
 
 double Hero::getPosX()
 {
-	return mPosX;
+	return newX;
 }
 
 double Hero::getPosY()
 {
-	return mPosY;
+	return newY;
 }
 
 int Hero::width()

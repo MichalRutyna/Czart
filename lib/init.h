@@ -28,7 +28,7 @@ bool init(UST& ust, windowType& window, rendererType& renderer)
 
 
     // Tworzenie renderatora z vsynciem
-    renderer.reset(SDL_CreateRenderer(window.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
+    renderer.reset(SDL_CreateRenderer(window.get(), -1, SDL_RENDERER_ACCELERATED));
     if (renderer == NULL) {
         std::cout << "Nie mozna zainicjalizowac renderatora, SDL Error: " << SDL_GetError();
         return false;

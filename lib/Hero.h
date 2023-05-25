@@ -18,6 +18,7 @@ private:
     // Faktyczne pozycje
     double mPosX, mPosY;
     double oldX, oldY;
+    double newX, newY;
 
     // Aktualna prędkość
     double mVelX, mVelY;

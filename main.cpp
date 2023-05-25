@@ -110,10 +110,8 @@ int main(int argc, char* argv[])
             accumulator -= ust.DT;
         }
         double alpha = static_cast<double>(accumulator) / ust.DT;
-        stachu->move_step(ust.DT);
         stachu->move(alpha);
-        accumulator -= alpha * ust.DT;
-        
+
         // -----------------------------------------------------------------------------------
 
 
