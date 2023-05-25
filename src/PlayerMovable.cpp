@@ -1,8 +1,8 @@
-#include "../lib/Hero.h"
+#include "../lib/PlayerMovable.h"
 
 UST& ust = UST::pobierz_ustawienia();
 
-Hero::Hero(textureType tekstura) : mWIDTH(tekstura->width()), mHEIGHT(tekstura->height()), NAME("Stachu Jones"), VELOCITY(0.5 * ust.VELOCITY_MULTIPLIER), tekstura(tekstura)
+PlayerMovable::PlayerMovable(textureType tekstura) : mWIDTH(tekstura->width()), mHEIGHT(tekstura->height()), NAME("Stachu Jones"), VELOCITY(0.5 * ust.VELOCITY_MULTIPLIER), tekstura(tekstura)
 {
 	mPosX = 0;
 	mPosY = 0;
@@ -17,7 +17,7 @@ Hero::Hero(textureType tekstura) : mWIDTH(tekstura->width()), mHEIGHT(tekstura->
 	newY = mPosY;
 }
 
-void Hero::handleEvent( SDL_Event& e )
+void PlayerMovable::handleEvent( SDL_Event& e )
 {
 	if (e.type == SDL_KEYDOWN && e.key.repeat == 0){
 		switch(e.key.keysym.sym)
@@ -40,7 +40,7 @@ void Hero::handleEvent( SDL_Event& e )
 	}
 }
 
-void Hero::move_step(int timeStep_ms)
+void PlayerMovable::move_step(int timeStep_ms)
 {
 	oldX = mPosX;
 	oldY = mPosY;
@@ -68,33 +68,33 @@ void Hero::move_step(int timeStep_ms)
 	}
 }
 
-void Hero::move(double timestep_alpha)
+void PlayerMovable::move(double timestep_alpha)
 {
 	newX = (mPosX * timestep_alpha) + (oldX * (1.0 - timestep_alpha));
 	newY = (mPosY * timestep_alpha) + (oldY * (1.0 - timestep_alpha));
 }
 
-void Hero::render(rendererType& renderer, int camX, int camY)
+void PlayerMovable::render(rendererType& renderer, int camX, int camY)
 {
 	tekstura->render(renderer, static_cast<int>(newX - camX), static_cast<int>(newY - camY));
 }
 
-double Hero::getPosX()
+double PlayerMovable::getPosX()
 {
 	return newX;
 }
 
-double Hero::getPosY()
+double PlayerMovable::getPosY()
 {
 	return newY;
 }
 
-int Hero::width()
+int PlayerMovable::width()
 {
 	return mWIDTH;
 }
 
-int Hero::height()
+int PlayerMovable::height()
 {
 	return mHEIGHT;
 }

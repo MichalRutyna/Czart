@@ -18,7 +18,7 @@ public:
 
 	bool loadFromFile(rendererType& renderer, std::string path, int scaled_width = -1, int scaled_height = -1);
 
-	void render(rendererType& renderer, int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	void render(rendererType& renderer, int x, int y, SDL_Rect* clip = NULL, double angle = 20.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	void setColor(uint8_t red, uint8_t green, uint8_t blue);
 

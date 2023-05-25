@@ -28,7 +28,7 @@ SDL_Surface* ScaledCopy(SDL_Surface* src, SDL_Rect* dstSize)
 {
 	SDL_Surface* scaledCopy(SDL_CreateRGBSurface(0,
 		dstSize->w, dstSize->h,
-		src->format->BitsPerPixel,
+		src->format->BitsPerPixel, 
 		src->format->Rmask, src->format->Gmask, src->format->Bmask, src->format->Amask));
 
 	// Get the old mode

@@ -133,19 +133,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Bron.cpp" />
     <ClCompile Include="src\LTimer.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\Hero.cpp" />
+    <ClCompile Include="src\PlayerMovable.cpp" />
     <ClCompile Include="src\LTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\czapka.png" />
     <Image Include="resources\exit.bmp" />
     <Image Include="resources\hello_world.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="lib\Bron.h" />
     <ClInclude Include="lib\close.h" />
     <ClInclude Include="lib\destruktory.h" />
-    <ClInclude Include="lib\Hero.h" />
+    <ClInclude Include="lib\PlayerMovable.h" />
     <ClInclude Include="lib\init.h" />
     <ClInclude Include="lib\LTexture.h" />
     <ClInclude Include="lib\ustawienia.h" />

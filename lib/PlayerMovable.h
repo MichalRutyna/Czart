@@ -1,12 +1,12 @@
-﻿#ifndef HERO_H
-#define HERO_H
+﻿#ifndef PLAYERMOVABLE_H
+#define PLAYERMOVABLE_H
 #include <iostream>
 #include "SDL.h"
 
 #include "ustawienia.h"
 #include "LTexture.h"
 
-class Hero{
+class PlayerMovable{
 private:
     const int mWIDTH;
     const int mHEIGHT;
@@ -26,7 +26,7 @@ private:
     textureType tekstura;
 
 public:
-    Hero(textureType);
+    PlayerMovable(textureType);
 
     void handleEvent(SDL_Event&);
 

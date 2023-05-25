@@ -5,7 +5,7 @@
 #include "lib/init.h"
 #include "lib/close.h"
 
-#include "lib/Hero.h"
+#include "lib/PlayerMovable.h"
 #include "lib/LTexture.h"
 #include "lib/LTimer.h"
 
@@ -74,8 +74,14 @@ int main(int argc, char* argv[])
     // -----------------------------------------------------------------------------------
     auto stachu_tekstura = std::make_shared<LTexture>();
     stachu_tekstura->loadFromFile(renderer, "resources/rendertest.png", 300, 100);
+    stachu_tekstura->setAlpha(160);
 
-    auto stachu = std::make_shared<Hero>(stachu_tekstura);
+    auto stachu = std::make_shared<PlayerMovable>(stachu_tekstura);
+    // -----------------------------------------------------------------------------------
+    auto kask = std::make_shared<LTexture>();
+    kask->loadFromFile(renderer, "resources/czapka.png", 350, 35);
+    auto mieczyk = std::make_shared<LTexture>();
+    mieczyk->loadFromFile(renderer, "resources/mieczyk.png", 100, 150);
     // -----------------------------------------------------------------------------------
     auto background = std::make_shared<LTexture>();
     background->loadFromFile(renderer, "resources/background.png");
@@ -114,7 +120,6 @@ int main(int argc, char* argv[])
 
         // -----------------------------------------------------------------------------------
 
-
         camera.x = (stachu->getPosX() + stachu->width() / 2) - ust.SCREEN_WIDTH / 2; //przesun kamere na stacha
         camera.y = (stachu->getPosY() + stachu->height() / 2) - ust.SCREEN_HEIGHT / 2;
 
@@ -140,6 +145,8 @@ int main(int argc, char* argv[])
         background->render(renderer, 0, 0, &camera); //tlo
 
         stachu->render(renderer, camera.x, camera.y); //zrenderuj
+        kask->render(renderer, stachu->getPosX()-camera.x-25, stachu->getPosY()-camera.y-10);
+        mieczyk->render(renderer, stachu->getPosX()-camera.x+55, stachu->getPosY()-camera.y-50);
 
         SDL_RenderPresent(renderer.get()); //update
         
