@@ -2,7 +2,9 @@
 
 UST& ust = UST::pobierz_ustawienia();
 
-PlayerMovable::PlayerMovable(textureType tekstura) : mWIDTH(tekstura->width()), mHEIGHT(tekstura->height()), NAME("Stachu Jones"), VELOCITY(0.5 * ust.VELOCITY_MULTIPLIER), tekstura(tekstura)
+PlayerMovable::PlayerMovable(rendererType& renderer, kameraType kamera, textureType tekstura) : mWIDTH(tekstura->width()), mHEIGHT(tekstura->height()),
+	NAME("Stachu Jones"), VELOCITY(0.5 * ust.VELOCITY_MULTIPLIER),
+	Renderable(renderer, kamera, tekstura)
 {
 	mPosX = 0;
 	mPosY = 0;
@@ -74,9 +76,9 @@ void PlayerMovable::move(double timestep_alpha)
 	newY = (mPosY * timestep_alpha) + (oldY * (1.0 - timestep_alpha));
 }
 
-void PlayerMovable::render(rendererType& renderer, int camX, int camY)
+void PlayerMovable::render()
 {
-	tekstura->render(renderer, static_cast<int>(newX - camX), static_cast<int>(newY - camY));
+	Renderable::render(static_cast<int>(newX), static_cast<int>(newY));
 }
 
 double PlayerMovable::getPosX()

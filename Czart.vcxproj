@@ -134,10 +134,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Bron.cpp" />
+    <ClCompile Include="src\Kamera.cpp" />
     <ClCompile Include="src\LTimer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\PlayerMovable.cpp" />
     <ClCompile Include="src\LTexture.cpp" />
+    <ClCompile Include="src\Renderable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\czapka.png" />
@@ -148,9 +150,11 @@
     <ClInclude Include="lib\Bron.h" />
     <ClInclude Include="lib\close.h" />
     <ClInclude Include="lib\destruktory.h" />
+    <ClInclude Include="lib\Kamera.h" />
     <ClInclude Include="lib\PlayerMovable.h" />
     <ClInclude Include="lib\init.h" />
     <ClInclude Include="lib\LTexture.h" />
+    <ClInclude Include="lib\Renderable.h" />
     <ClInclude Include="lib\ustawienia.h" />
     <ClInclude Include="lib\LTimer.h" />
   </ItemGroup>

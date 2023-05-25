@@ -5,8 +5,9 @@
 
 #include "ustawienia.h"
 #include "LTexture.h"
+#include "Renderable.h"
 
-class PlayerMovable{
+class PlayerMovable : public Renderable {
 private:
     const int mWIDTH;
     const int mHEIGHT;
@@ -23,10 +24,8 @@ private:
     // Aktualna prędkość
     double mVelX, mVelY;
 
-    textureType tekstura;
-
 public:
-    PlayerMovable(textureType);
+    PlayerMovable(rendererType&, kameraType, textureType);
 
     void handleEvent(SDL_Event&);
 
@@ -34,7 +33,7 @@ public:
 
     void move(double alpha);
 
-    void render(rendererType&, int camX, int camY);
+    void render();
 
     double getPosX();
     double getPosY();
