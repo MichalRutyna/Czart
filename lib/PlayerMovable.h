@@ -32,9 +32,6 @@ public:
 
     void render();
 
-    double getPosX();
-    double getPosY();
-
     int width();
     int height();
 };

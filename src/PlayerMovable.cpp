@@ -72,23 +72,13 @@ void PlayerMovable::move_step(int timeStep_ms)
 
 void PlayerMovable::move(double timestep_alpha)
 {
-	xPosToRender = (mPosX * timestep_alpha) + (oldX * (1.0 - timestep_alpha));
-	yPosToRender = (mPosY * timestep_alpha) + (oldY * (1.0 - timestep_alpha));
+	xPosToRender = static_cast<int>((mPosX * timestep_alpha) + (oldX * (1.0 - timestep_alpha)));
+	yPosToRender = static_cast<int>((mPosY * timestep_alpha) + (oldY * (1.0 - timestep_alpha)));
 }
 
 void PlayerMovable::render()
 {
-	Renderable::render(static_cast<int>(xPosToRender), static_cast<int>(yPosToRender));
-}
-
-double PlayerMovable::getPosX()
-{
-	return static_cast<int>(xPosToRender);
-}
-
-double PlayerMovable::getPosY()
-{
-	return static_cast<int>(yPosToRender);
+	Renderable::render(xPosToRender, yPosToRender);
 }
 
 int PlayerMovable::width()
