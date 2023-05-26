@@ -1,10 +1,10 @@
 #include "../lib/PlayerMovable.h"
 
-UST& ust = UST::pobierz_ustawienia();
+static UST& ust = UST::pobierz_ustawienia();
 
-PlayerMovable::PlayerMovable(rendererType& renderer, kameraType kamera, textureType tekstura) : mWIDTH(tekstura->width()), mHEIGHT(tekstura->height()),
-	NAME("Stachu Jones"), VELOCITY(0.5 * ust.VELOCITY_MULTIPLIER),
-	Renderable(renderer, kamera, tekstura)
+
+PlayerMovable::PlayerMovable(rendererType& renderer, textureType tekstura, kameraType kamera) : NAME("Stachu Jones"), VELOCITY(0.5 * ust.VELOCITY_MULTIPLIER),
+	Renderable(renderer, tekstura, kamera)
 {
 	mPosX = 0;
 	mPosY = 0;
@@ -15,8 +15,8 @@ PlayerMovable::PlayerMovable(rendererType& renderer, kameraType kamera, textureT
 	oldX = mPosX;
 	oldY = mPosY;
 
-	newX = mPosX;
-	newY = mPosY;
+	mWIDTH = tekstura->width();
+	mHEIGHT = tekstura->height();
 }
 
 void PlayerMovable::handleEvent( SDL_Event& e )
@@ -72,23 +72,23 @@ void PlayerMovable::move_step(int timeStep_ms)
 
 void PlayerMovable::move(double timestep_alpha)
 {
-	newX = (mPosX * timestep_alpha) + (oldX * (1.0 - timestep_alpha));
-	newY = (mPosY * timestep_alpha) + (oldY * (1.0 - timestep_alpha));
+	xPosToRender = (mPosX * timestep_alpha) + (oldX * (1.0 - timestep_alpha));
+	yPosToRender = (mPosY * timestep_alpha) + (oldY * (1.0 - timestep_alpha));
 }
 
 void PlayerMovable::render()
 {
-	Renderable::render(static_cast<int>(newX), static_cast<int>(newY));
+	Renderable::render(static_cast<int>(xPosToRender), static_cast<int>(yPosToRender));
 }
 
 double PlayerMovable::getPosX()
 {
-	return newX;
+	return static_cast<int>(xPosToRender);
 }
 
 double PlayerMovable::getPosY()
 {
-	return newY;
+	return static_cast<int>(yPosToRender);
 }
 
 int PlayerMovable::width()

@@ -9,8 +9,6 @@
 
 class PlayerMovable : public Renderable {
 private:
-    const int mWIDTH;
-    const int mHEIGHT;
     const std::string NAME;
 
     // Bardziej przyśpiesznie
@@ -19,13 +17,12 @@ private:
     // Faktyczne pozycje
     double mPosX, mPosY;
     double oldX, oldY;
-    double newX, newY;
 
     // Aktualna prędkość
     double mVelX, mVelY;
 
 public:
-    PlayerMovable(rendererType&, kameraType, textureType);
+    PlayerMovable(rendererType&, textureType, kameraType);
 
     void handleEvent(SDL_Event&);
 

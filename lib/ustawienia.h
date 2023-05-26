@@ -15,19 +15,30 @@ typedef class Kamera Kamera;
 typedef std::shared_ptr<LTexture> textureType;
 typedef std::shared_ptr<Kamera> kameraType;
 
+typedef enum {
+	none = 0,
+	horizontal = 1,
+	vertical = 2
+} TextureFlip;
+
 class UST
 {
 public:
-    const int SCREEN_WIDTH = 1600;
-    const int SCREEN_HEIGHT = 800;
-	const int LEVEL_WIDTH = 8000;
-	const int LEVEL_HEIGHT = 8000;
-	const int DT = 10;
-	const float VELOCITY_MULTIPLIER = 2;
+    static const int SCREEN_WIDTH = 1600;
+    static const int SCREEN_HEIGHT = 800;
+	static const int LEVEL_WIDTH = 8000;
+	static const int LEVEL_HEIGHT = 8000;
+	static const int DT = 10;
+	const float VELOCITY_MULTIPLIER = 2.0f;
+
 private:
 	UST() {}
 	UST(const UST&);
 public:
+	~UST() { 
+		std::cout << "Usunieto ustawienia\n";
+		
+	}
 	static UST & pobierz_ustawienia(){
 		static UST ustawienia;
 		return ustawienia;

@@ -71,22 +71,28 @@ int main(int argc, char* argv[])
     //Update the surface
     SDL_UpdateWindowSurface(window.get());
 
+
+    auto kamera = std::make_shared<Kamera>();
     // -----------------------------------------------------------------------------------
     auto stachu_tekstura = std::make_shared<LTexture>();
     stachu_tekstura->loadFromFile(renderer, "resources/rendertest.png", 300, 100);
     stachu_tekstura->setAlpha(160);
 
-    auto stachu = std::make_shared<PlayerMovable>(stachu_tekstura);
+    auto stachu = std::make_shared<PlayerMovable>(renderer, stachu_tekstura, kamera);
+    kamera->setFollow(stachu);
     // -----------------------------------------------------------------------------------
-    auto kask = std::make_shared<LTexture>();
-    kask->loadFromFile(renderer, "resources/czapka.png", 350, 35);
-    auto mieczyk = std::make_shared<LTexture>();
-    mieczyk->loadFromFile(renderer, "resources/mieczyk.png", 100, 150);
+    auto kask_text = std::make_shared<LTexture>();
+    kask_text->loadFromFile(renderer, "resources/czapka.png", 350, 35);
+    auto kask = std::make_shared<Renderable>(renderer, kask_text, kamera);
+
+    auto mieczyk_text = std::make_shared<LTexture>();
+    mieczyk_text->loadFromFile(renderer, "resources/mieczyk.png", 100, 150);
+    auto mieczyk = std::make_shared<Renderable>(renderer, mieczyk_text, kamera);
     // -----------------------------------------------------------------------------------
-    auto background = std::make_shared<LTexture>();
-    background->loadFromFile(renderer, "resources/background.png");
+    auto background_txt = std::make_shared<LTexture>();
+    background_txt->loadFromFile(renderer, "resources/background.png");
+    auto background = std::make_shared<Renderable>(renderer, background_txt, kamera);
     // -----------------------------------------------------------------------------------
-    SDL_Rect camera = {0.0f, 0.0f, ust.SCREEN_WIDTH, ust.SCREEN_HEIGHT };
     // -----------------------------------------------------------------------------------
     auto frame_timer = std::make_shared<LTimer>();
     uint64_t accumulator = 0;
@@ -120,33 +126,15 @@ int main(int argc, char* argv[])
 
         // -----------------------------------------------------------------------------------
 
-        camera.x = (stachu->getPosX() + stachu->width() / 2) - ust.SCREEN_WIDTH / 2; //przesun kamere na stacha
-        camera.y = (stachu->getPosY() + stachu->height() / 2) - ust.SCREEN_HEIGHT / 2;
-
-        if (camera.x < 0)
-        {
-            camera.x = 0;
-        }
-        if (camera.y < 0)
-        {
-            camera.y = 0;
-        }
-        if (camera.x > ust.LEVEL_WIDTH - camera.w)
-        {
-            camera.x = ust.LEVEL_WIDTH - camera.w;
-        }
-        if (camera.y > ust.LEVEL_HEIGHT - camera.h)
-        {
-            camera.y = ust.LEVEL_HEIGHT - camera.h;
-        }
+        kamera->update();
 
         SDL_RenderClear(renderer.get()); //wyczysc
 
-        background->render(renderer, 0, 0, &camera); //tlo
+        background->render(0, 0); //tlo
 
-        stachu->render(renderer, camera.x, camera.y); //zrenderuj
-        kask->render(renderer, stachu->getPosX()-camera.x-25, stachu->getPosY()-camera.y-10);
-        mieczyk->render(renderer, stachu->getPosX()-camera.x+55, stachu->getPosY()-camera.y-50);
+        stachu->render(); //zrenderuj
+        kask->render(stachu->getPosX()-25, stachu->getPosY()-10);
+        mieczyk->render(stachu->getPosX()+55, stachu->getPosY()-50);
 
         SDL_RenderPresent(renderer.get()); //update
         
