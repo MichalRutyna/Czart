@@ -11,11 +11,11 @@ protected:
 	int mHEIGHT;
 
 	double mPosX, mPosY;
-	double oldX, oldY;
+	double previousX, previousY;
 
 	double mVelX, mVelY;
 
-	int xPosToRender, yPosToRender;
+	int visibleX, visibleY;
 public:
 	Moving(double velocity);
 

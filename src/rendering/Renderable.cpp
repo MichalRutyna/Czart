@@ -10,23 +10,17 @@ Renderable::Renderable(rendererType& renderer, textureType texture, kameraType k
 	mCenter = nullptr;
 	mFlip = SDL_FLIP_NONE;
 
-	renderX = 0;
-	renderY = 0;
 }
 
 void Renderable::render(int posX, int posY)
 {
-	renderX = posX;
-	renderY = posY;
-
-	int tempX = renderX;
-	int tempY = renderY;
+	int tempX = posX;
+	int tempY = posY;
 
 	if (mKamera != nullptr) { // jeœli w konstruktorze nie podano kamery, obiekt jest umieszczany absolutnie
 		tempX -= mKamera->getX();
 		tempY -= mKamera->getY();
 	}
-	std::cout << "Render: " << renderX << "x" << renderY << std::endl;
 	mTexture->render(*mRenderer, tempX, tempY, mClip, mAngle, mCenter, mFlip);
 }
 
@@ -75,12 +69,12 @@ void Renderable::change_flip(TextureFlip flip)
 
 int Renderable::getPosX()
 {
-	return renderX;
+	return visibleX;
 }
 
 int Renderable::getPosY()
 {
-	return renderY;
+	return visibleY;
 }
 
 int Renderable::width()

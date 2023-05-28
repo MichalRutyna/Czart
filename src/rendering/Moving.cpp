@@ -10,11 +10,11 @@ Moving::Moving(double velocity) : VELOCITY(velocity)
 	mVelX = 0;
 	mVelY = 0;
 
-	oldX = mPosX;
-	oldY = mPosY;
+	previousX = mPosX;
+	previousY = mPosY;
 
-	xPosToRender = mPosX;
-	yPosToRender = mPosY;
+	visibleX = mPosX;
+	visibleY = mPosY;
 
 	mWIDTH = 0;
 	mHEIGHT = 0;
@@ -22,8 +22,8 @@ Moving::Moving(double velocity) : VELOCITY(velocity)
 
 void Moving::move_step(int timeStep_ms)
 {
-	oldX = mPosX;
-	oldY = mPosY;
+	previousX = mPosX;
+	previousY = mPosY;
 
 	mPosX += mVelX * timeStep_ms;
 
@@ -50,7 +50,6 @@ void Moving::move_step(int timeStep_ms)
 
 void Moving::move(double alpha)
 {
-	xPosToRender = static_cast<int>((mPosX * alpha) + (oldX * (1.0 - alpha)));
-	yPosToRender = static_cast<int>((mPosY * alpha) + (oldY * (1.0 - alpha)));
-	std::cout << "Moving: " << xPosToRender << "x" << yPosToRender << std::endl;
+	visibleX = static_cast<int>((mPosX * alpha) + (previousX * (1.0 - alpha)));
+	visibleY = static_cast<int>((mPosY * alpha) + (previousY * (1.0 - alpha)));
 }

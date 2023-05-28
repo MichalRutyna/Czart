@@ -21,8 +21,11 @@ public:
 
     void render();
 
-    int width();
-    int height();
+    int width() override;
+    int height() override;
+
+    int getPosX() override;
+    int getPosY() override;
 };
 
 #endif

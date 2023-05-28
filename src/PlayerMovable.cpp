@@ -35,8 +35,8 @@ void PlayerMovable::handleEvent( SDL_Event& e )
 /*
 void PlayerMovable::move_step(int timeStep_ms)
 {
-	oldX = mPosX;
-	oldY = mPosY;
+	previousX = mPosX;
+	previousY = mPosY;
 
 	mPosX += mVelX * timeStep_ms;
 	
@@ -62,14 +62,14 @@ void PlayerMovable::move_step(int timeStep_ms)
 }
 void PlayerMovable::move(double timestep_alpha)
 {
-	xPosToRender = static_cast<int>((mPosX * timestep_alpha) + (oldX * (1.0 - timestep_alpha)));
-	yPosToRender = static_cast<int>((mPosY * timestep_alpha) + (oldY * (1.0 - timestep_alpha)));
+	visibleX = static_cast<int>((mPosX * timestep_alpha) + (previousX * (1.0 - timestep_alpha)));
+	visibleY = static_cast<int>((mPosY * timestep_alpha) + (previousY * (1.0 - timestep_alpha)));
 }
 
 */
 void PlayerMovable::render()
 {
-	Renderable::render(Moving::xPosToRender, Moving::yPosToRender);
+	Renderable::render(Moving::visibleX, Moving::visibleY);
 }
 
 int PlayerMovable::width()
@@ -80,4 +80,14 @@ int PlayerMovable::width()
 int PlayerMovable::height()
 {
 	return mHEIGHT;
+}
+
+int PlayerMovable::getPosX()
+{
+	return Moving::visibleX;
+}
+
+int PlayerMovable::getPosY()
+{
+	return Moving::visibleY;
 }

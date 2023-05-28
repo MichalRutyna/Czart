@@ -13,8 +13,7 @@ private:
 	double mAngle;
 	std::shared_ptr<SDL_Point> mCenter;
 	SDL_RendererFlip mFlip;
-	int renderX;
-	int renderY;
+	int visibleX, visibleY;
 
 protected:
 	rendererType* mRenderer;
@@ -32,10 +31,11 @@ public:
 	void change_center(int x, int y);
 	void change_flip(TextureFlip);
 
-	int getPosX();
-	int getPosY();
-	int width();
-	int height();
+	virtual int getPosX();
+	virtual int getPosY();
+
+	virtual int width();
+	virtual int height();
 };
 
 #endif // !RENDERABLE
