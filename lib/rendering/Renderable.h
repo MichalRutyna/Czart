@@ -13,16 +13,14 @@ private:
 	double mAngle;
 	std::shared_ptr<SDL_Point> mCenter;
 	SDL_RendererFlip mFlip;
+	int renderX;
+	int renderY;
 
 protected:
 	rendererType* mRenderer;
 	kameraType mKamera;
 	textureType mTexture;
 
-	int mWIDTH;
-	int mHEIGHT;
-
-	int xPosToRender, yPosToRender;
 
 public:
 	Renderable(rendererType&, textureType, kameraType = nullptr);

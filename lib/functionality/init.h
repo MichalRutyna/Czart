@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "../ustawienia.h"
+#include "../functionality/LTimer.h"
 
 bool init(UST& ust, windowType& window, rendererType& renderer)
 {

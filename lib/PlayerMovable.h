@@ -6,29 +6,18 @@
 #include "ustawienia.h"
 #include "functionality/LTexture.h"
 #include "rendering/Renderable.h"
+#include "rendering/Moving.h"
 
-class PlayerMovable : public Renderable {
+class PlayerMovable : public Renderable, public Moving {
 private:
+
     const std::string NAME;
 
-    // Bardziej przyśpiesznie
-    const double VELOCITY;
-
-    // Faktyczne pozycje
-    double mPosX, mPosY;
-    double oldX, oldY;
-
-    // Aktualna prędkość
-    double mVelX, mVelY;
-
 public:
+
     PlayerMovable(rendererType&, textureType, kameraType);
 
     void handleEvent(SDL_Event&);
-
-    void move_step(int timeStep);
-
-    void move(double alpha);
 
     void render();
 

@@ -3,18 +3,9 @@
 static UST& ust = UST::pobierz_ustawienia();
 
 
-PlayerMovable::PlayerMovable(rendererType& renderer, textureType tekstura, kameraType kamera) : NAME("Stachu Jones"), VELOCITY(0.5 * ust.VELOCITY_MULTIPLIER),
-	Renderable(renderer, tekstura, kamera)
+PlayerMovable::PlayerMovable(rendererType& renderer, textureType tekstura, kameraType kamera) : NAME("Stachu Jones"),
+	Renderable(renderer, tekstura, kamera), Moving(0.5 * ust.VELOCITY_MULTIPLIER)
 {
-	mPosX = 0;
-	mPosY = 0;
-
-	mVelX = 0;
-	mVelY = 0;
-
-	oldX = mPosX;
-	oldY = mPosY;
-
 	mWIDTH = tekstura->width();
 	mHEIGHT = tekstura->height();
 }
@@ -41,7 +32,7 @@ void PlayerMovable::handleEvent( SDL_Event& e )
 		}
 	}
 }
-
+/*
 void PlayerMovable::move_step(int timeStep_ms)
 {
 	oldX = mPosX;
@@ -69,16 +60,16 @@ void PlayerMovable::move_step(int timeStep_ms)
 		mPosY = static_cast<double>(ust.LEVEL_HEIGHT - mHEIGHT);
 	}
 }
-
 void PlayerMovable::move(double timestep_alpha)
 {
 	xPosToRender = static_cast<int>((mPosX * timestep_alpha) + (oldX * (1.0 - timestep_alpha)));
 	yPosToRender = static_cast<int>((mPosY * timestep_alpha) + (oldY * (1.0 - timestep_alpha)));
 }
 
+*/
 void PlayerMovable::render()
 {
-	Renderable::render(xPosToRender, yPosToRender);
+	Renderable::render(Moving::xPosToRender, Moving::yPosToRender);
 }
 
 int PlayerMovable::width()

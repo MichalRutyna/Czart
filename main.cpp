@@ -6,8 +6,6 @@
 #include "lib/functionality/close.h"
 
 #include "lib/PlayerMovable.h"
-#include "lib/functionality/LTexture.h"
-#include "lib/functionality/LTimer.h"
 
 #include <iostream>
 #include <vector>
@@ -80,6 +78,7 @@ int main(int argc, char* argv[])
 
     auto stachu = std::make_shared<PlayerMovable>(renderer, stachu_tekstura, kamera);
     kamera->setFollow(stachu);
+    
     // -----------------------------------------------------------------------------------
     auto kask_text = std::make_shared<LTexture>();
     kask_text->loadFromFile(renderer, "resources/czapka.png", 350, 35);
@@ -88,6 +87,7 @@ int main(int argc, char* argv[])
     auto mieczyk_text = std::make_shared<LTexture>();
     mieczyk_text->loadFromFile(renderer, "resources/mieczyk.png", 100, 150);
     auto mieczyk = std::make_shared<Renderable>(renderer, mieczyk_text, kamera);
+   
     // -----------------------------------------------------------------------------------
     auto background_txt = std::make_shared<LTexture>();
     background_txt->loadFromFile(renderer, "resources/background.png");
@@ -97,8 +97,6 @@ int main(int argc, char* argv[])
     std::vector<std::shared_ptr<Renderable>> obiektyProgramu;
     obiektyProgramu.push_back(stachu);
     obiektyProgramu.push_back(background);
-    obiektyProgramu.push_back(mieczyk);
-    obiektyProgramu.push_back(kask);
 
     // -----------------------------------------------------------------------------------
  
