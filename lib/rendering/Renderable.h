@@ -1,9 +1,9 @@
 #ifndef RENDERABLE
 #define RENDERABLE
 
-#include "LTexture.h"
-#include "ustawienia.h"
-#include "Kamera.h"
+#include "../functionality/LTexture.h"
+#include "../ustawienia.h"
+#include "../rendering/Kamera.h"
 #include <memory>
 
 class Renderable

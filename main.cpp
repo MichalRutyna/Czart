@@ -2,12 +2,12 @@
 #include <SDL_image.h>
 
 #include "lib/ustawienia.h"
-#include "lib/init.h"
-#include "lib/close.h"
+#include "lib/functionality/init.h"
+#include "lib/functionality/close.h"
 
 #include "lib/PlayerMovable.h"
-#include "lib/LTexture.h"
-#include "lib/LTimer.h"
+#include "lib/functionality/LTexture.h"
+#include "lib/functionality/LTimer.h"
 
 #include <iostream>
 #include <vector>
@@ -93,6 +93,17 @@ int main(int argc, char* argv[])
     background_txt->loadFromFile(renderer, "resources/background.png");
     auto background = std::make_shared<Renderable>(renderer, background_txt, kamera);
     // -----------------------------------------------------------------------------------
+
+    std::vector<std::shared_ptr<Renderable>> obiektyProgramu;
+    obiektyProgramu.push_back(stachu);
+    obiektyProgramu.push_back(background);
+    obiektyProgramu.push_back(mieczyk);
+    obiektyProgramu.push_back(kask);
+
+    // -----------------------------------------------------------------------------------
+ 
+    std::vector<std::shared_ptr<Renderable>> movableObjects;
+
     // -----------------------------------------------------------------------------------
     auto frame_timer = std::make_shared<LTimer>();
     uint64_t accumulator = 0;
@@ -111,7 +122,7 @@ int main(int argc, char* argv[])
             stachu->handleEvent(e);
         }
 
-        // -----------------------------------------------------------------------------------
+        // -----------------------------Movement------------------------------------------------
         accumulator += frame_timer->getTicks();
         frame_timer->start();
 
@@ -128,11 +139,13 @@ int main(int argc, char* argv[])
 
         kamera->update();
 
+
+        // -----------------------------Render----------------------------------------------
+
         SDL_RenderClear(renderer.get()); //wyczysc
 
-        background->render(0, 0); //tlo
-
-        stachu->render(); //zrenderuj
+        background->render(0, 0);
+        stachu->render();
         kask->render(stachu->getPosX()-25, stachu->getPosY()-10);
         mieczyk->render(stachu->getPosX()+55, stachu->getPosY()-50);
 
@@ -141,7 +154,7 @@ int main(int argc, char* argv[])
 
         // -----------------------------------------------------------------------------------
     }
-    close();
 
+    close();
     return 0;
 }

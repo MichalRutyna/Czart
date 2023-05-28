@@ -4,8 +4,8 @@
 #include "SDL.h"
 
 #include "ustawienia.h"
-#include "LTexture.h"
-#include "Renderable.h"
+#include "functionality/LTexture.h"
+#include "rendering/Renderable.h"
 
 class PlayerMovable : public Renderable {
 private:

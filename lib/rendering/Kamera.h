@@ -1,7 +1,7 @@
 #ifndef KAMERA
 #define KAMERA
 
-#include "ustawienia.h"
+#include "../ustawienia.h"
 #include "Renderable.h"
 
 typedef class Renderable Renderable;

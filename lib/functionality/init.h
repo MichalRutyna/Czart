@@ -3,7 +3,7 @@
 #include <iostream>
 #include <memory>
 
-#include "ustawienia.h"
+#include "../ustawienia.h"
 
 bool init(UST& ust, windowType& window, rendererType& renderer)
 {

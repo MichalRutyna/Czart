@@ -1,4 +1,4 @@
-﻿#include "../lib/LTimer.h"
+﻿#include "../../lib/functionality/LTimer.h"
 
 LTimer::LTimer()
 {

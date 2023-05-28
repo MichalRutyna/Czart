@@ -1,4 +1,4 @@
-#include "../lib/Kamera.h"
+#include "../../lib/rendering/Kamera.h"
 
 static UST& ust = UST::pobierz_ustawienia();
 

@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include "LTexture.h"
-#include "Renderable.h"
+#include "functionality/LTexture.h"
+#include "rendering/Renderable.h"
 #include "ustawienia.h"
 
 class Bron : public Renderable

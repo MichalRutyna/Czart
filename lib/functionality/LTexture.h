@@ -6,7 +6,7 @@
 #include <SDL_Image.h>
 #include <memory>
 
-#include "ustawienia.h"
+#include "../ustawienia.h"
 
 class LTexture 
 {

@@ -1,4 +1,4 @@
-#include "../lib/Renderable.h"
+#include "../../lib/rendering/Renderable.h"
 
 Renderable::Renderable(rendererType& renderer, textureType texture, kameraType kamera) :
 	mKamera(kamera), mTexture(texture) 
