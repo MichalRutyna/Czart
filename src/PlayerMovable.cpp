@@ -32,41 +32,7 @@ void PlayerMovable::handleEvent( SDL_Event& e )
 		}
 	}
 }
-/*
-void PlayerMovable::move_step(int timeStep_ms)
-{
-	previousX = mPosX;
-	previousY = mPosY;
 
-	mPosX += mVelX * timeStep_ms;
-	
-	if (mPosX < 0)
-	{
-		mPosX = 0;
-	}
-	else if (mPosX + mWIDTH > ust.LEVEL_WIDTH)
-	{
-		mPosX = static_cast<double>(ust.LEVEL_WIDTH - mWIDTH);
-	}
-
-	mPosY += mVelY * timeStep_ms;
-
-	if (mPosY < 0)
-	{
-		mPosY = 0;
-	}
-	else if (mPosY + mHEIGHT > ust.LEVEL_HEIGHT)
-	{
-		mPosY = static_cast<double>(ust.LEVEL_HEIGHT - mHEIGHT);
-	}
-}
-void PlayerMovable::move(double timestep_alpha)
-{
-	visibleX = static_cast<int>((mPosX * timestep_alpha) + (previousX * (1.0 - timestep_alpha)));
-	visibleY = static_cast<int>((mPosY * timestep_alpha) + (previousY * (1.0 - timestep_alpha)));
-}
-
-*/
 void PlayerMovable::render()
 {
 	Renderable::render(Moving::visibleX, Moving::visibleY);

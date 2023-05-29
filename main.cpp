@@ -92,6 +92,8 @@ int main(int argc, char* argv[])
     auto background_txt = std::make_shared<LTexture>();
     background_txt->loadFromFile(renderer, "resources/background.png");
     auto background = std::make_shared<Renderable>(renderer, background_txt, kamera);
+
+    std::cout << "Pomyslnie wczytano tekstury\n";
     // -----------------------------------------------------------------------------------
 
     std::vector<std::shared_ptr<Renderable>> obiektyProgramu;
@@ -104,9 +106,11 @@ int main(int argc, char* argv[])
 
     // -----------------------------------------------------------------------------------
     auto frame_timer = std::make_shared<LTimer>();
-    uint64_t accumulator = 0;
+    double accumulator = 0;
+    uint64_t PerfCountFrequency = SDL_GetPerformanceFrequency();
+    uint64_t start_time = SDL_GetPerformanceCounter(), end_time = 0; double time_taken;
     // -----------------------------------------------------------------------------------
-
+    std::cout << "Rozpoczynam petle zdarzen\n";
     while (!quit)
     {
         while (SDL_PollEvent(&e) != 0)
@@ -121,8 +125,10 @@ int main(int argc, char* argv[])
         }
 
         // -----------------------------Movement------------------------------------------------
-        accumulator += frame_timer->getTicks();
-        frame_timer->start();
+        end_time = SDL_GetPerformanceCounter();
+        time_taken = ((double)(end_time - start_time) / (double)PerfCountFrequency) * 1000.0;
+        accumulator += time_taken;
+        start_time = end_time;
 
         while (accumulator >= ust.DT)
         {
@@ -130,7 +136,7 @@ int main(int argc, char* argv[])
             stachu->move_step(ust.DT);
             accumulator -= ust.DT;
         }
-        double alpha = static_cast<double>(accumulator) / ust.DT;
+        double alpha = accumulator / ust.DT;
         stachu->move(alpha);
 
         // -----------------------------------------------------------------------------------

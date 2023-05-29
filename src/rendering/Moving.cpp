@@ -1,4 +1,5 @@
 #include "../../lib/rendering/Moving.h"
+#include <math.h>
 
 UST& ust = UST::pobierz_ustawienia();
 
@@ -13,8 +14,8 @@ Moving::Moving(double velocity) : VELOCITY(velocity)
 	previousX = mPosX;
 	previousY = mPosY;
 
-	visibleX = mPosX;
-	visibleY = mPosY;
+	visibleX = static_cast<int>(mPosX);
+	visibleY = static_cast<int>(mPosY);
 
 	mWIDTH = 0;
 	mHEIGHT = 0;
@@ -50,6 +51,7 @@ void Moving::move_step(int timeStep_ms)
 
 void Moving::move(double alpha)
 {
-	visibleX = static_cast<int>((mPosX * alpha) + (previousX * (1.0 - alpha)));
-	visibleY = static_cast<int>((mPosY * alpha) + (previousY * (1.0 - alpha)));
+	visibleX = (int)round((mPosX * alpha) + (previousX * (1.0 - alpha)));
+	visibleY = (int)round((mPosY * alpha) + (previousY * (1.0 - alpha)));
+	std::cout << "Obliczone: " << (mPosX * alpha) + (previousX * (1.0 - alpha)) << " Wyswietlone: " << visibleX << " ";
 }
