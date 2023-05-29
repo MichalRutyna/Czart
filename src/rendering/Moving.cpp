@@ -5,8 +5,8 @@ UST& ust = UST::pobierz_ustawienia();
 
 Moving::Moving(double velocity) : VELOCITY(velocity)
 {
-	mPosX = 0;
-	mPosY = 0;
+	mPosX = 0.0;
+	mPosY = 0.0;
 
 	mVelX = 0;
 	mVelY = 0;
@@ -14,8 +14,8 @@ Moving::Moving(double velocity) : VELOCITY(velocity)
 	previousX = mPosX;
 	previousY = mPosY;
 
-	visibleX = static_cast<int>(mPosX);
-	visibleY = static_cast<int>(mPosY);
+	visibleX = (float)mPosX;
+	visibleY = (float)mPosY;
 
 	mWIDTH = 0;
 	mHEIGHT = 0;
@@ -51,7 +51,6 @@ void Moving::move_step(int timeStep_ms)
 
 void Moving::move(double alpha)
 {
-	visibleX = (int)round((mPosX * alpha) + (previousX * (1.0 - alpha)));
-	visibleY = (int)round((mPosY * alpha) + (previousY * (1.0 - alpha)));
-	std::cout << "Obliczone: " << (mPosX * alpha) + (previousX * (1.0 - alpha)) << " Wyswietlone: " << visibleX << " ";
+	visibleX = (mPosX * alpha) + (previousX * (1.0 - alpha));
+	visibleY = (mPosY * alpha) + (previousY * (1.0 - alpha));
 }

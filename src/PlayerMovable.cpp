@@ -50,10 +50,10 @@ int PlayerMovable::height()
 
 int PlayerMovable::getPosX()
 {
-	return Moving::visibleX;
+	return (int)round(Moving::visibleX);
 }
 
 int PlayerMovable::getPosY()
 {
-	return Moving::visibleY;
+	return (int)round(Moving::visibleY);
 }

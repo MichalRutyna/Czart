@@ -135,6 +135,7 @@ int main(int argc, char* argv[])
             // Tu trzeba zrobiæ w³aœciwie listê wszystkiego co ma siê ruszaæ (zgodnie z fizyk¹, kamera chyba nie musi)
             stachu->move_step(ust.DT);
             accumulator -= ust.DT;
+            
         }
         double alpha = accumulator / ust.DT;
         stachu->move(alpha);
@@ -154,7 +155,6 @@ int main(int argc, char* argv[])
         mieczyk->render(stachu->getPosX()+55, stachu->getPosY()-50);
 
         SDL_RenderPresent(renderer.get()); //update
-        
 
         // -----------------------------------------------------------------------------------
     }

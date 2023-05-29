@@ -15,7 +15,7 @@ protected:
 
 	double mVelX, mVelY;
 
-	int visibleX, visibleY;
+	double visibleX, visibleY;
 public:
 	Moving(double velocity);
 

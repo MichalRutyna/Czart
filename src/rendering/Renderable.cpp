@@ -12,16 +12,28 @@ Renderable::Renderable(rendererType& renderer, textureType texture, kameraType k
 
 }
 
-void Renderable::render(int posX, int posY)
+void Renderable::render(double posX, double posY)
 {
-	int tempX = posX;
-	int tempY = posY;
+	double tempX = posX;
+	double tempY = posY;
 
 	if (mKamera != nullptr) { // jeœli w konstruktorze nie podano kamery, obiekt jest umieszczany absolutnie
 		tempX -= mKamera->getX();
 		tempY -= mKamera->getY();
 	}
-	mTexture->render(*mRenderer, tempX, tempY, mClip, mAngle, mCenter, mFlip);
+	mTexture->render(*mRenderer, (int)round(tempX), (int)round(tempY), mClip, mAngle, mCenter, mFlip);
+}
+
+void Renderable::render(int posX, int posY)
+{
+	double tempX = (double)posX;
+	double tempY = (double)posY;
+
+	if (mKamera != nullptr) { // jeœli w konstruktorze nie podano kamery, obiekt jest umieszczany absolutnie
+		tempX -= mKamera->getX();
+		tempY -= mKamera->getY();
+	}
+	mTexture->render(*mRenderer, (int)round(tempX), (int)round(tempY), mClip, mAngle, mCenter, mFlip);
 }
 
 void Renderable::change_clip(int x, int y, int w, int h)
@@ -69,12 +81,12 @@ void Renderable::change_flip(TextureFlip flip)
 
 int Renderable::getPosX()
 {
-	return visibleX;
+	return (int)visibleX;
 }
 
 int Renderable::getPosY()
 {
-	return visibleY;
+	return (int)visibleY;
 }
 
 int Renderable::width()

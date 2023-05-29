@@ -13,7 +13,7 @@ private:
 	double mAngle;
 	std::shared_ptr<SDL_Point> mCenter;
 	SDL_RendererFlip mFlip;
-	int visibleX, visibleY;
+	double visibleX, visibleY;
 
 protected:
 	rendererType* mRenderer;
@@ -24,7 +24,8 @@ protected:
 public:
 	Renderable(rendererType&, textureType, kameraType = nullptr);
 
-	virtual void render(int posX, int posY); // Pozycje absolutne, kamera odejmowana w funkcji
+	virtual void render(double posX, double posY); // Pozycje absolutne, kamera odejmowana w funkcji
+	void render(int posX, int posY);
 
 	void change_clip(int x, int y, int w, int h);
 	void change_angle(double angle);

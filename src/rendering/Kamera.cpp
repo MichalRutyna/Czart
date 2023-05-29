@@ -25,33 +25,33 @@ void Kamera::update()
     {
         return;
     }
-    x = (following->getPosX() + following->width() / 2) - ust.SCREEN_WIDTH / 2; //przesun kamere na stacha
-    y = (following->getPosY() + following->height() / 2) - ust.SCREEN_HEIGHT / 2;
+    x = (following->getPosX() + following->width() / 2.0f) - ust.SCREEN_WIDTH / 2.0f; //przesun kamere na stacha
+    y = (following->getPosY() + following->height() / 2.0f) - ust.SCREEN_HEIGHT / 2.0f;
 
     if (x < 0)
     {
-        x = 0;
+        x = 0.0f;
     }
     if (y < 0)
     {
-        y = 0;
+        y = 0.0f;
     }
     if (x > ust.LEVEL_WIDTH - w)
     {
-        x = ust.LEVEL_WIDTH - w;
+        x = (float)ust.LEVEL_WIDTH - w;
     }
     if (y > ust.LEVEL_HEIGHT - h)
     {                          
-        y = ust.LEVEL_HEIGHT - h;
+        y = (float)ust.LEVEL_HEIGHT - h;
     }
 }
 
-int Kamera::getX()
+float Kamera::getX()
 {
 	return x;
 }
 
-int Kamera::getY()
+float Kamera::getY()
 {
 	return y;
 }
