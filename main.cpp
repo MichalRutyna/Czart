@@ -4,6 +4,7 @@
 #include "lib/ustawienia.h"
 #include "lib/functionality/init.h"
 #include "lib/functionality/close.h"
+#include "lib/functionality/GameObjectHandler.h"
 
 #include "lib/PlayerMovable.h"
 
@@ -59,13 +60,15 @@ int main(int argc, char* argv[])
     auto background = std::make_shared<Renderable>(renderer, background_txt, kamera);
 
     // ---------------------------Creation of object layers-------------------------------
-    
-    // TODO GameObjectHandler[3];
+    GameObjectHandler objHandler;
+    objHandler.subscribeBackground(background);
+
     // -----------------------------------------------------------------------------------
     kamera->setFollow(stachu);
  
-    std::vector<std::shared_ptr<Moving>> movableObjects;
+    std::vector<std::shared_ptr<Movable>> movableObjects;
     movableObjects.push_back(stachu);
+
 
     // -----------------------------------------------------------------------------------
     double accumulator = 0;

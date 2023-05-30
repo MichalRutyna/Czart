@@ -2,19 +2,18 @@
 #define KAMERA
 
 #include "../ustawienia.h"
-#include "Renderable.h"
+#include "../functionality/GameObjects.h"
 
-typedef class Renderable Renderable;
 
 class Kamera {
 private:
 	float y, x;
 	int w, h;
-	std::shared_ptr<Renderable> following;
+	std::shared_ptr<_GameObject> following;
 
 public:
 	Kamera();
-	void setFollow(std::shared_ptr<Renderable>);
+	void setFollow(std::shared_ptr<_GameObject>);
 
 	void update();
 

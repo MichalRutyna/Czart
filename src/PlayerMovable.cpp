@@ -4,10 +4,10 @@ static UST& ust = UST::pobierz_ustawienia();
 
 
 PlayerMovable::PlayerMovable(rendererType& renderer, textureType tekstura, kameraType kamera) : NAME("Stachu Jones"),
-	Renderable(renderer, tekstura, kamera), Moving(0.5 * ust.VELOCITY_MULTIPLIER)
+	DMovable(renderer, tekstura, kamera)
 {
-	mWIDTH = tekstura->width();
-	mHEIGHT = tekstura->height();
+	mWidth = tekstura->width();
+	mHeight = tekstura->height();
 }
 
 void PlayerMovable::handleEvent( SDL_Event& e )
@@ -31,29 +31,4 @@ void PlayerMovable::handleEvent( SDL_Event& e )
 			case SDLK_RIGHT: mVelX -= VELOCITY; break;
 		}
 	}
-}
-
-void PlayerMovable::render()
-{
-	Renderable::render(Moving::visibleX, Moving::visibleY);
-}
-
-int PlayerMovable::width()
-{
-	return mWIDTH;
-}
-
-int PlayerMovable::height()
-{
-	return mHEIGHT;
-}
-
-int PlayerMovable::getPosX()
-{
-	return (int)round(Moving::visibleX);
-}
-
-int PlayerMovable::getPosY()
-{
-	return (int)round(Moving::visibleY);
 }

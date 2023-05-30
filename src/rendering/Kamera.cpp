@@ -14,7 +14,7 @@ Kamera::Kamera()
 	following = nullptr;
 }
 
-void Kamera::setFollow(std::shared_ptr<Renderable> follow)
+void Kamera::setFollow(std::shared_ptr<_GameObject> follow)
 {
     following = follow;
 }
@@ -25,8 +25,8 @@ void Kamera::update()
     {
         return;
     }
-    x = (following->getPosX() + following->width() / 2.0f) - ust.SCREEN_WIDTH / 2.0f; //przesun kamere na stacha
-    y = (following->getPosY() + following->height() / 2.0f) - ust.SCREEN_HEIGHT / 2.0f;
+    x = (following->getX() + following->getWidth() / 2.0f) - ust.SCREEN_WIDTH / 2.0f; //przesun kamere na stacha
+    y = (following->getY() + following->getHeight() / 2.0f) - ust.SCREEN_HEIGHT / 2.0f;
 
     if (x < 0)
     {

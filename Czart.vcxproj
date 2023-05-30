@@ -135,11 +135,10 @@
   <ItemGroup>
     <ClCompile Include="src\Bron.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\functionality\Drawable.cpp" />
     <ClCompile Include="src\functionality\GameObjectHandler.cpp" />
+    <ClCompile Include="src\functionality\GameObjects.cpp" />
     <ClCompile Include="src\functionality\LTexture.cpp" />
     <ClCompile Include="src\functionality\LTimer.cpp" />
-    <ClCompile Include="src\functionality\Updatable.cpp" />
     <ClCompile Include="src\PlayerMovable.cpp" />
     <ClCompile Include="src\rendering\Kamera.cpp" />
     <ClCompile Include="src\rendering\Moving.cpp" />
@@ -154,15 +153,13 @@
     <ClInclude Include="lib\Bron.h" />
     <ClInclude Include="lib\functionality\close.h" />
     <ClInclude Include="lib\functionality\destruktory.h" />
-    <ClInclude Include="lib\functionality\Drawable.h" />
     <ClInclude Include="lib\functionality\GameObjectHandler.h" />
+    <ClInclude Include="lib\functionality\GameObjects.h" />
     <ClInclude Include="lib\functionality\init.h" />
     <ClInclude Include="lib\functionality\LTexture.h" />
     <ClInclude Include="lib\functionality\LTimer.h" />
-    <ClInclude Include="lib\functionality\Updatable.h" />
     <ClInclude Include="lib\PlayerMovable.h" />
     <ClInclude Include="lib\rendering\Kamera.h" />
-    <ClInclude Include="lib\rendering\Moving.h" />
     <ClInclude Include="lib\rendering\Renderable.h" />
     <ClInclude Include="lib\ustawienia.h" />
   </ItemGroup>
