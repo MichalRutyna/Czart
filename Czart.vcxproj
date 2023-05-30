@@ -141,10 +141,10 @@
     <ClCompile Include="src\functionality\LTimer.cpp" />
     <ClCompile Include="src\PlayerMovable.cpp" />
     <ClCompile Include="src\rendering\Kamera.cpp" />
-    <ClCompile Include="src\rendering\Moving.cpp" />
-    <ClCompile Include="src\rendering\Renderable.cpp" />
+    <ClCompile Include="src\Tlo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\background.png" />
     <Image Include="resources\czapka.png" />
     <Image Include="resources\exit.bmp" />
     <Image Include="resources\hello_world.bmp" />
@@ -158,10 +158,12 @@
     <ClInclude Include="lib\functionality\init.h" />
     <ClInclude Include="lib\functionality\LTexture.h" />
     <ClInclude Include="lib\functionality\LTimer.h" />
+    <ClInclude Include="lib\GOInterfaces.h" />
     <ClInclude Include="lib\PlayerMovable.h" />
     <ClInclude Include="lib\rendering\Kamera.h" />
-    <ClInclude Include="lib\rendering\Renderable.h" />
+    <ClInclude Include="lib\Tlo.h" />
     <ClInclude Include="lib\ustawienia.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

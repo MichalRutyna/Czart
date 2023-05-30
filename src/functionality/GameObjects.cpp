@@ -14,10 +14,10 @@ void Movable::interpolate(const double alpha)
 void Movable::move_step(int timeStep_ms)
 {
 	mInPreviousX = mInternalX;
-	mInPreviousX = mInternalX;
+	mInPreviousY = mInternalY;
 
 	mInternalX += mVelX * timeStep_ms;
-	mInternalX += mVelY * timeStep_ms;
+	mInternalY += mVelY * timeStep_ms;
 
 	handleCollisions();
 
@@ -48,8 +48,8 @@ void Movable::handleCollisions()
 
 void Movable::move(double alpha)
 {
-	mVisibleX = (mInternalX * alpha) + (mInPreviousX * (1.0 - alpha));
-	mVisibleY = (mInternalY * alpha) + (mInPreviousY * (1.0 - alpha));
+	mVisibleX = static_cast<int>((mInternalX * alpha) + (mInPreviousX * (1.0 - alpha)));
+	mVisibleY = static_cast<int>((mInternalY * alpha) + (mInPreviousY * (1.0 - alpha)));
 }
 
 void DMovable::render()
@@ -62,4 +62,18 @@ void DMovable::render()
 		tempY -= static_cast<int>(mKamera->getY());
 	}
 	mTexture->render(*mRenderer, static_cast<int>(round(tempX)), static_cast<int>(round(tempY)), mClip, mAngle, mCenter, mFlip);
+}
+
+void DGameObject::render()
+{
+	int tempX = mVisibleX;
+	int tempY = mVisibleY;
+	std::cout << tempX << "x" << tempY << " ";
+
+	if (mKamera != nullptr) {
+		tempX -= static_cast<int>(mKamera->getX());
+		tempY -= static_cast<int>(mKamera->getY());
+	}
+	mTexture->render(*mRenderer, static_cast<int>(round(tempX)), static_cast<int>(round(tempY)), mClip, mAngle, mCenter, mFlip);
+
 }

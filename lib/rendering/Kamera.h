@@ -2,7 +2,7 @@
 #define KAMERA
 
 #include "../ustawienia.h"
-#include "../functionality/GameObjects.h"
+#include "../GOInterfaces.h"
 
 
 class Kamera {

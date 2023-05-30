@@ -5,7 +5,7 @@
 #include "GameObjects.h"
 
 typedef std::shared_ptr<_Drawable> drawablePointer;
-typedef std::shared_ptr<_Movable> movingPointer;
+typedef std::shared_ptr<Movable> movingPointer;
 typedef std::shared_ptr<_Updatable> updatablePointer;
 
 
@@ -21,7 +21,7 @@ private:
 
 public:
     /*
-    3 typy obiektów: _Drawable, _Updatable i specjalny _Movable (ró¿ni siê od updatable tym, ¿e ma dodatkowy krok przy obliczaniu ruchu)
+    3 typy obiektów: _Drawable, _Updatable i specjalny Movable (ró¿ni siê od updatable tym, ¿e ma dodatkowy krok przy obliczaniu ruchu)
     */
     GameObjectHandler();
 

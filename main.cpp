@@ -5,18 +5,18 @@
 #include "lib/functionality/init.h"
 #include "lib/functionality/close.h"
 #include "lib/functionality/GameObjectHandler.h"
+#include "lib/rendering/Kamera.h"
+#include "lib/Tlo.h"
 
 #include "lib/PlayerMovable.h"
 
 #include <iostream>
 #include <vector>
 
-using namespace std;
-
 
 int main(int argc, char* argv[])
 {
-    UST& ust = UST::pobierz_ustawienia();
+    static UST& ust = UST::pobierz_ustawienia();
 
     windowType window;
     rendererType renderer;
@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
     // Initialization of window and renderer objects
     bool initialized = init(ust, window, renderer);
     if (!initialized) {
-        std::cout << "Wyst¹pi³ b³¹d przy inicjalizacji programu" << std::endl;
+        std::cout << "Wystapil bl¹d przy inicjalizacji programu" << std::endl;
         return 0;
     }
 
@@ -55,27 +55,29 @@ int main(int argc, char* argv[])
 
     // ---------------------------Object initialization-------------------------------------
     auto stachu = std::make_shared<PlayerMovable>(renderer, stachu_tekstura, kamera);
-    auto kask = std::make_shared<Renderable>(renderer, kask_text, kamera);
-    auto mieczyk = std::make_shared<Renderable>(renderer, mieczyk_text, kamera);
-    auto background = std::make_shared<Renderable>(renderer, background_txt, kamera);
+    //auto kask = std::make_shared<Renderable>(renderer, kask_text, kamera);
+    //auto mieczyk = std::make_shared<Renderable>(renderer, mieczyk_text, kamera);
+    auto background = std::make_shared<Tlo>(renderer, background_txt, kamera);
 
-    // ---------------------------Creation of object layers-------------------------------
+    std::cout << "Pomyslnie zainicjalizowano tekstury" << std::endl;
+
+    // ---------------------------Creation of object layers--------------------------------
     GameObjectHandler objHandler;
-    objHandler.subscribeBackground(background);
 
-    // -----------------------------------------------------------------------------------
+    objHandler.subscribeBackground(background);
+    objHandler.subscribePlayerLayer(stachu);
+    objHandler.subscribeMoving(stachu);
+
+    // ---------------------------Additional initialization--------------------------------
     kamera->setFollow(stachu);
  
-    std::vector<std::shared_ptr<Movable>> movableObjects;
-    movableObjects.push_back(stachu);
-
-
-    // -----------------------------------------------------------------------------------
+    // ---------------------------Frame handling initialization----------------------------
     double accumulator = 0;
     uint64_t PerfCountFrequency = SDL_GetPerformanceFrequency();
     uint64_t start_time = SDL_GetPerformanceCounter(), end_time = 0; 
     double time_taken;
-    // -----------------------------------------------------------------------------------
+
+    // ------------------------------------------------------------------------------------
     std::cout << "Rozpoczynam petle zdarzen\n";
     while (!quit)
     {
@@ -93,21 +95,22 @@ int main(int argc, char* argv[])
         // -----------------------------Movement------------------------------------------------
         end_time = SDL_GetPerformanceCounter();
         time_taken = ((double)(end_time - start_time) / (double)PerfCountFrequency) * 1000.0;
+        //std::cout << 1.0 / (time_taken / 1000.0) <<  " ";
         accumulator += time_taken;
         start_time = end_time;
 
         while (accumulator >= ust.DT)
         {
-            for (auto& object : movableObjects)
+            for (auto& object : objHandler.getMovingObjects())
             {
-                object->move_step(ust.DT);
+                object->update(ust.DT);
             }
             accumulator -= ust.DT;
         }
         double alpha = accumulator / ust.DT;
-        for (auto& object : movableObjects)
+        for (auto& object : objHandler.getMovingObjects())
         {
-            object->move(alpha);
+            object->interpolate(alpha);
         }
         // -----------------------------Render----------------------------------------------
 
@@ -115,10 +118,21 @@ int main(int argc, char* argv[])
 
         SDL_RenderClear(renderer.get()); //wyczysc
 
-        for (auto& element : backgroundLayer)
+        for (auto& element : objHandler.getBackgroundLayer())
         {
+            element->render();
         }
-        stachu->render();
+
+        for (auto& element : objHandler.getPlayerLayer())
+        {
+            element->render();
+        }
+
+        for (auto& element : objHandler.getForegroundLayer())
+        {
+            element->render();
+        }
+
         //kask->render(stachu->getPosX()-25, stachu->getPosY()-10);
         //mieczyk->render(stachu->getPosX()+55, stachu->getPosY()-50);
 

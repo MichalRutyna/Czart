@@ -1,7 +1,5 @@
 #include "../lib/PlayerMovable.h"
 
-static UST& ust = UST::pobierz_ustawienia();
-
 
 PlayerMovable::PlayerMovable(rendererType& renderer, textureType tekstura, kameraType kamera) : NAME("Stachu Jones"),
 	DMovable(renderer, tekstura, kamera)
