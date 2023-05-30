@@ -59,10 +59,6 @@ int main(int argc, char* argv[])
     auto background = std::make_shared<Renderable>(renderer, background_txt, kamera);
 
     // ---------------------------Creation of object layers-------------------------------
-
-    std::vector<std::shared_ptr<GameObject>> backgroundLayer;   // background only
-    std::vector<std::shared_ptr<GameObject>> playerLayer;       // player, monsters, walls
-    std::vector<std::shared_ptr<GameObject>> foregroundLayer;   // things which should obstruct view
     
     // TODO GameObjectHandler[3];
     // -----------------------------------------------------------------------------------

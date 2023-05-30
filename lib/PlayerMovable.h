@@ -7,9 +7,9 @@
 #include "functionality/LTexture.h"
 #include "rendering/Renderable.h"
 #include "rendering/Moving.h"
-#include "functionality/GameObject.h"
+#include "functionality/Drawable.h"
 
-class PlayerMovable : public Renderable, public Moving, public GameObject{
+class PlayerMovable : public Renderable, public Moving, public Drawable{
 private:
 
     const std::string NAME;

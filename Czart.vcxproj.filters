@@ -39,10 +39,13 @@
     <ClCompile Include="src\functionality\LTimer.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\functionality\GameObject.cpp">
+    <ClCompile Include="src\functionality\Drawable.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\GameObjectHandler.cpp">
+    <ClCompile Include="src\functionality\Updatable.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="src\functionality\GameObjectHandler.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
@@ -91,10 +94,13 @@
     <ClInclude Include="lib\functionality\LTimer.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="lib\functionality\GameObject.h">
+    <ClInclude Include="lib\functionality\Drawable.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="lib\rendering\GameObjectHandler.h">
+    <ClInclude Include="lib\functionality\Updatable.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\functionality\GameObjectHandler.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
