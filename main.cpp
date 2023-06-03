@@ -74,7 +74,7 @@ int main(int argc, char* argv[])
     // -----------------------------------------------------------------------------------
     auto stachu_tekstura = std::make_shared<LTexture>();
     stachu_tekstura->loadFromFile(renderer, "resources/rendertest.png", 300, 100);
-    stachu_tekstura->setAlpha(160);
+    //przezroczystosc - stachu_tekstura->setAlpha(255);
 
     auto stachu = std::make_shared<PlayerMovable>(renderer, stachu_tekstura, kamera);
     kamera->setFollow(stachu);
@@ -83,6 +83,7 @@ int main(int argc, char* argv[])
     auto kask_text = std::make_shared<LTexture>();
     kask_text->loadFromFile(renderer, "resources/czapka.png", 350, 35);
     auto kask = std::make_shared<Renderable>(renderer, kask_text, kamera);
+    kask->change_center(stachu->getPosX()+25+stachu_tekstura->width()/2, stachu->getPosY()+10+stachu_tekstura->height()/2);
 
     auto mieczyk_text = std::make_shared<LTexture>();
     mieczyk_text->loadFromFile(renderer, "resources/mieczyk.png", 100, 150);
@@ -93,7 +94,28 @@ int main(int argc, char* argv[])
     background_txt->loadFromFile(renderer, "resources/background.png");
     auto background = std::make_shared<Renderable>(renderer, background_txt, kamera);
     // -----------------------------------------------------------------------------------
+    int rozmiar_kuli = 150;
 
+    auto orb_border_text = std::make_shared<LTexture>();
+    orb_border_text->loadFromFile(renderer, "resources/obramowka.png", rozmiar_kuli+5, rozmiar_kuli+5);
+    auto orb_border = std::make_shared<Renderable>(renderer, orb_border_text);
+
+    SDL_Rect hpClips[30];
+    LTexture hp_texture, mana_texture;
+    
+    hp_texture.loadFromFile(renderer, "resources/kula_hp.png", 30*rozmiar_kuli, rozmiar_kuli);
+    mana_texture.loadFromFile(renderer, "resources/kula_mana.png", 30 * rozmiar_kuli, rozmiar_kuli);
+
+
+    for (int i = 0; i < 30; i++)
+    {
+        hpClips[i].x = rozmiar_kuli *i;
+        hpClips[i].y = 0;
+        hpClips[i].w = rozmiar_kuli;
+
+        hpClips[i].h = rozmiar_kuli;
+    }
+    // -----------------------------------------------------------------------------------
     std::vector<std::shared_ptr<Renderable>> obiektyProgramu;
     obiektyProgramu.push_back(stachu);
     obiektyProgramu.push_back(background);
@@ -107,14 +129,21 @@ int main(int argc, char* argv[])
     uint64_t accumulator = 0;
     // -----------------------------------------------------------------------------------
 
+    int hp_frame = 0;
+    int i = 0;
     while (!quit)
     {
+        std::shared_ptr<SDL_Rect> currentClip = std::make_shared<SDL_Rect>(hpClips[hp_frame / 5]);
         while (SDL_PollEvent(&e) != 0)
         {
             //User requests quit
             if (e.type == SDL_QUIT)
             {
                 quit = true;
+            }
+            if (e.type == SDL_KEYDOWN)
+            {
+                i++;
             }
 
             stachu->handleEvent(e);
@@ -137,7 +166,6 @@ int main(int argc, char* argv[])
 
         kamera->update();
 
-
         // -----------------------------Render----------------------------------------------
 
         SDL_RenderClear(renderer.get()); //wyczysc
@@ -146,13 +174,26 @@ int main(int argc, char* argv[])
         stachu->render();
         kask->render(stachu->getPosX()-25, stachu->getPosY()-10);
         mieczyk->render(stachu->getPosX()+55, stachu->getPosY()-50);
+        
+        currentClip->y = 0 + i * 20;
+        currentClip->h = 150 - i * 20;
+        
+        hp_texture.render(renderer, 100, ust.SCREEN_HEIGHT - 202 + i*20, currentClip);
+        mana_texture.render(renderer, 1300, ust.SCREEN_HEIGHT - 202 + i*20, currentClip);
+        hp_frame++;
+        if (hp_frame/5 >= 30) hp_frame = 0;
+        orb_border->render(98, ust.SCREEN_HEIGHT - 204); // hp
+        orb_border->render(1300, ust.SCREEN_HEIGHT - 204); // mana
 
         SDL_RenderPresent(renderer.get()); //update
         
 
         // -----------------------------------------------------------------------------------
+        
+       // kask->change_angle(i);
+       // stachu->change_angle(i);
+        //i+=0.1;
     }
-
     close();
     return 0;
 }
