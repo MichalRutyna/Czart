@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
     // Initialization of window and renderer objects
     bool initialized = init(ust, window, renderer);
     if (!initialized) {
-        std::cout << "Wystapil bl¹d przy inicjalizacji programu" << std::endl;
+        std::cout << "Wystapil blÂ¹d przy inicjalizacji programu" << std::endl;
         return 0;
     }
 
@@ -40,8 +40,7 @@ int main(int argc, char* argv[])
     // ------------------------Texture initialization----------------------------------------
     auto stachu_tekstura = std::make_shared<LTexture>();
     stachu_tekstura->loadFromFile(renderer, "resources/rendertest.png", 300, 100);
-    stachu_tekstura->setAlpha(160);
-    
+  
     auto kask_text = std::make_shared<LTexture>();
     kask_text->loadFromFile(renderer, "resources/czapka.png", 350, 35);
 
@@ -50,7 +49,34 @@ int main(int argc, char* argv[])
    
     auto background_txt = std::make_shared<LTexture>();
     background_txt->loadFromFile(renderer, "resources/background.png");
+  
+    // -----------------------------------------------------------------------------------
+    int rozmiar_kuli = 150;
 
+    auto orb_border_text = std::make_shared<LTexture>();
+    orb_border_text->loadFromFile(renderer, "resources/obramowka.png", rozmiar_kuli+5, rozmiar_kuli+5);
+    auto orb_border = std::make_shared<Renderable>(renderer, orb_border_text);
+
+    SDL_Rect hpClips[30];
+    LTexture hp_texture, mana_texture;
+    
+    hp_texture.loadFromFile(renderer, "resources/kula_hp.png", 30*rozmiar_kuli, rozmiar_kuli);
+    mana_texture.loadFromFile(renderer, "resources/kula_mana.png", 30 * rozmiar_kuli, rozmiar_kuli);
+
+
+    for (int i = 0; i < 30; i++)
+    {
+        hpClips[i].x = rozmiar_kuli *i;
+        hpClips[i].y = 0;
+        hpClips[i].w = rozmiar_kuli;
+
+        hpClips[i].h = rozmiar_kuli;
+    }
+    // -----------------------------------------------------------------------------------
+    std::vector<std::shared_ptr<Renderable>> obiektyProgramu;
+    obiektyProgramu.push_back(stachu);
+    obiektyProgramu.push_back(background);
+  
     std::cout << "Pomyslnie wczytano tekstury\n";
 
     // ---------------------------Object initialization-------------------------------------
@@ -59,8 +85,10 @@ int main(int argc, char* argv[])
     //auto mieczyk = std::make_shared<Renderable>(renderer, mieczyk_text, kamera);
     auto background = std::make_shared<Tlo>(renderer, background_txt, kamera);
 
-    std::cout << "Pomyslnie zainicjalizowano tekstury" << std::endl;
+    std::cout << "Pomyslnie zainicjalizowano obiekty" << std::endl;
 
+    int hp_frame = 0;
+    int i = 0;
     // ---------------------------Creation of object layers--------------------------------
     GameObjectHandler objHandler;
 
@@ -79,14 +107,20 @@ int main(int argc, char* argv[])
 
     // ------------------------------------------------------------------------------------
     std::cout << "Rozpoczynam petle zdarzen\n";
+  
     while (!quit)
     {
+        std::shared_ptr<SDL_Rect> currentClip = std::make_shared<SDL_Rect>(hpClips[hp_frame / 5]);
         while (SDL_PollEvent(&e) != 0)
         {
             //User requests quit
             if (e.type == SDL_QUIT)
             {
                 quit = true;
+            }
+            if (e.type == SDL_KEYDOWN)
+            {
+                i++;
             }
 
             stachu->handleEvent(e);
@@ -115,7 +149,7 @@ int main(int argc, char* argv[])
         // -----------------------------Render----------------------------------------------
 
         kamera->update();
-
+      
         SDL_RenderClear(renderer.get()); //wyczysc
 
         for (auto& element : objHandler.getBackgroundLayer())
@@ -132,15 +166,28 @@ int main(int argc, char* argv[])
         {
             element->render();
         }
-
+      
+        currentClip->y = 0 + i * 20;
+        currentClip->h = 150 - i * 20;
+        
+        hp_texture.render(renderer, 100, ust.SCREEN_HEIGHT - 202 + i*20, currentClip);
+        mana_texture.render(renderer, 1300, ust.SCREEN_HEIGHT - 202 + i*20, currentClip);
+        hp_frame++;
+        if (hp_frame/5 >= 30) hp_frame = 0;
+        orb_border->render(98, ust.SCREEN_HEIGHT - 204); // hp
+        orb_border->render(1300, ust.SCREEN_HEIGHT - 204); // mana
+      
         //kask->render(stachu->getPosX()-25, stachu->getPosY()-10);
         //mieczyk->render(stachu->getPosX()+55, stachu->getPosY()-50);
 
         SDL_RenderPresent(renderer.get()); //update
 
         // -----------------------------------------------------------------------------------
+        
+       // kask->change_angle(i);
+       // stachu->change_angle(i);
+        //i+=0.1;
     }
-
     close();
     return 0;
 }
