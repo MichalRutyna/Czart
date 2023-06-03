@@ -5,10 +5,9 @@
 
 #include "ustawienia.h"
 #include "functionality/LTexture.h"
-#include "rendering/Renderable.h"
-#include "rendering/Moving.h"
+#include "functionality/GameObjects.h"
 
-class PlayerMovable : public Renderable, public Moving {
+class PlayerMovable : public DMovable{
 private:
 
     const std::string NAME;
@@ -19,13 +18,6 @@ public:
 
     void handleEvent(SDL_Event&);
 
-    void render();
-
-    int width() override;
-    int height() override;
-
-    int getPosX() override;
-    int getPosY() override;
 };
 
 #endif
