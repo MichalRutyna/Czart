@@ -21,11 +21,6 @@ void GameObjectHandler::subscribeForeground(drawablePointer object)
 	foregroundLayer.push_back(object);
 }
 
-void GameObjectHandler::subscribeMoving(movingPointer object)
-{
-	movingObjects.push_back(object);
-}
-
 void GameObjectHandler::subscribeUpdatable(updatablePointer object)
 {
 	updatableObjects.push_back(object);
@@ -46,11 +41,6 @@ void GameObjectHandler::unsubscribeForeground(drawablePointer object)
 	foregroundLayer.erase(std::remove(foregroundLayer.begin(), foregroundLayer.end(), object), foregroundLayer.end());
 }
 
-void GameObjectHandler::unsubscribeMoving(movingPointer object)
-{
-	movingObjects.erase(std::remove(movingObjects.begin(), movingObjects.end(), object), movingObjects.end());
-}
-
 void GameObjectHandler::unsubscribeUpdatable(updatablePointer object)
 {
 	updatableObjects.erase(std::remove(updatableObjects.begin(), updatableObjects.end(), object), updatableObjects.end());
@@ -69,11 +59,6 @@ std::vector<drawablePointer> GameObjectHandler::getPlayerLayer()
 std::vector<drawablePointer> GameObjectHandler::getForegroundLayer()
 {
 	return foregroundLayer;
-}
-
-std::vector<movingPointer> GameObjectHandler::getMovingObjects()
-{
-	return movingObjects;
 }
 
 std::vector<updatablePointer> GameObjectHandler::getUpdatableObjects()

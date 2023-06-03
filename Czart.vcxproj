@@ -139,6 +139,7 @@
     <ClCompile Include="src\functionality\GameObjects.cpp" />
     <ClCompile Include="src\functionality\LTexture.cpp" />
     <ClCompile Include="src\functionality\LTimer.cpp" />
+    <ClCompile Include="src\interface\InterfaceElement.cpp" />
     <ClCompile Include="src\PlayerMovable.cpp" />
     <ClCompile Include="src\rendering\Kamera.cpp" />
     <ClCompile Include="src\Tlo.cpp" />
@@ -155,10 +156,11 @@
     <ClInclude Include="lib\functionality\destruktory.h" />
     <ClInclude Include="lib\functionality\GameObjectHandler.h" />
     <ClInclude Include="lib\functionality\GameObjects.h" />
+    <ClInclude Include="lib\functionality\GOInterfaces.h" />
     <ClInclude Include="lib\functionality\init.h" />
     <ClInclude Include="lib\functionality\LTexture.h" />
     <ClInclude Include="lib\functionality\LTimer.h" />
-    <ClInclude Include="lib\GOInterfaces.h" />
+    <ClInclude Include="lib\interface\InterfaceElement.h" />
     <ClInclude Include="lib\PlayerMovable.h" />
     <ClInclude Include="lib\rendering\Kamera.h" />
     <ClInclude Include="lib\Tlo.h" />

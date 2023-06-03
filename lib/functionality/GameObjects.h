@@ -2,7 +2,7 @@
 
 #include "../ustawienia.h"
 #include "LTexture.h"
-#include "../GOInterfaces.h"
+#include "GOInterfaces.h"
 #include "../rendering/Kamera.h"
 
 static UST& ust = UST::pobierz_ustawienia();
@@ -59,7 +59,7 @@ public:
 	virtual void render();
 };
 
-// _Updatable and _Drawable Game object
+// Updatable and Drawable Game object
 class DUGameObject : public DGameObject, public _Updatable
 {
 

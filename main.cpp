@@ -49,8 +49,10 @@ int main(int argc, char* argv[])
    
     auto background_txt = std::make_shared<LTexture>();
     background_txt->loadFromFile(renderer, "resources/background.png");
-  
-    // -----------------------------------------------------------------------------------
+
+    std::cout << "Pomyslnie wczytano tekstury\n";
+
+    // -------------------------------Kule------------------------------------------------
     int rozmiar_kuli = 150;
 
     auto orb_border_text = std::make_shared<LTexture>();
@@ -72,12 +74,6 @@ int main(int argc, char* argv[])
 
         hpClips[i].h = rozmiar_kuli;
     }
-    // -----------------------------------------------------------------------------------
-    std::vector<std::shared_ptr<Renderable>> obiektyProgramu;
-    obiektyProgramu.push_back(stachu);
-    obiektyProgramu.push_back(background);
-  
-    std::cout << "Pomyslnie wczytano tekstury\n";
 
     // ---------------------------Object initialization-------------------------------------
     auto stachu = std::make_shared<PlayerMovable>(renderer, stachu_tekstura, kamera);
@@ -94,7 +90,7 @@ int main(int argc, char* argv[])
 
     objHandler.subscribeBackground(background);
     objHandler.subscribePlayerLayer(stachu);
-    objHandler.subscribeMoving(stachu);
+    objHandler.subscribeUpdatable(stachu);
 
     // ---------------------------Additional initialization--------------------------------
     kamera->setFollow(stachu);
@@ -135,14 +131,14 @@ int main(int argc, char* argv[])
 
         while (accumulator >= ust.DT)
         {
-            for (auto& object : objHandler.getMovingObjects())
+            for (auto& object : objHandler.getUpdatableObjects())
             {
                 object->update(ust.DT);
             }
             accumulator -= ust.DT;
         }
         double alpha = accumulator / ust.DT;
-        for (auto& object : objHandler.getMovingObjects())
+        for (auto& object : objHandler.getUpdatableObjects())
         {
             object->interpolate(alpha);
         }
