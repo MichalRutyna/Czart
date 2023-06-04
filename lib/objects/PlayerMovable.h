@@ -7,7 +7,7 @@
 #include "../functionality/LTexture.h"
 #include "../functionality/GameObjects.h"
 
-class PlayerMovable : public DMovable, public _HandlingEvents
+class PlayerMovable : public Entity, public _HandlingEvents
 {
 public:
     PlayerMovable(rendererType&, textureType, cameraType);

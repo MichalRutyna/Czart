@@ -1,5 +1,5 @@
 #pragma once
-class Entity
+class Entity : public DMovable
 {
 protected:
 	int MAX_HP;
@@ -8,7 +8,10 @@ protected:
 	int mHp, mMana;
 
 public:
+
 	int getHp();
 	int getMana();
+
+	Entity(rendererType& renderer, textureType tekstura, cameraType kamera) : DMovable(renderer, tekstura, kamera) {}
 };
 

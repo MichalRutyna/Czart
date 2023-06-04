@@ -12,4 +12,3 @@ private:
 public:
 	Hero(rendererType&, textureType, cameraType);
 };
-
