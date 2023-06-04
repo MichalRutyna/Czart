@@ -89,6 +89,9 @@ int main(int argc, char* argv[])
     // updates
     objHandler.subscribeUpdatable(stachu);
 
+    // events
+    objHandler.subscribeEvents(stachu);
+
     // ---------------------------Additional initialization--------------------------------
     kamera->setFollow(stachu);
  
@@ -111,8 +114,10 @@ int main(int argc, char* argv[])
                 quit = true;
             }
 
-            stachu->handleEvent(e);
-            // TODO event list
+            for (auto& object : objHandler.getEventObjects())
+            {
+                object->handleEvent(e);
+            }
         }
 
         // -----------------------------Movement------------------------------------------------

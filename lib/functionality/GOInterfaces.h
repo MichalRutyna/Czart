@@ -66,3 +66,9 @@ public:
 	virtual void update(const int deltaTime) = 0;
 	virtual void interpolate(const double alpha) = 0;
 };
+
+
+class _HandlingEvents {
+public:
+	virtual void handleEvent(SDL_Event&) = 0;
+};
