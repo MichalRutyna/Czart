@@ -1,7 +1,7 @@
 #include "../../lib/functionality/Animated.h"
 
 
-Animated::Animated(rendererType& r, textureType t, cameraType c) : DGameObject(r, t, c), mCLIP_WIDTH(0), mCLIP_HEIGHT(0)
+Animated::Animated(rendererType& r, textureType t, int clipW, int clipH, cameraType c) : mCLIP_WIDTH(clipW), mCLIP_HEIGHT(clipH), DGameObject(r, t, c)
 {
     for (int i = 0; i < CLIPS_SIZE; i++)
     {

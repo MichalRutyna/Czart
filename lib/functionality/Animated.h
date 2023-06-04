@@ -19,7 +19,7 @@ protected:
 	int mCLIP_HEIGHT;
 
 public:
-	Animated(rendererType& r, textureType t, cameraType c = nullptr);
+	Animated(rendererType& r, textureType t, int clipW, int clipH, cameraType c = nullptr);
 	void clipUpdate();
 
 };

@@ -14,6 +14,7 @@ private:
 public:
 	Orb(rendererType&, textureType, int posx, int posy, cameraType = nullptr);
 
+	void render();
 };
 
 class OrbBorder : public DGameObject
