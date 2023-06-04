@@ -106,6 +106,7 @@ void GameObjectHandler::markForRemoval(std::shared_ptr<_GameObject> object)
 
 std::shared_ptr<_GameObject> GameObjectHandler::popRemoval()
 {
+	if (objectsToRemove.empty()) return nullptr;
 	std::shared_ptr<_GameObject>& temp = objectsToRemove.front();
 	objectsToRemove.pop();
 	return temp;

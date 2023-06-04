@@ -2,7 +2,7 @@
 
 Entity::Entity(rendererType& renderer, textureType tekstura, cameraType kamera) : DMovable(renderer, tekstura, kamera)
 {
-	//ust.objectHandler->markForAddition(std::make_shared<_GameObject>(*this));
+	
 }
 
 Entity::~Entity()
@@ -31,7 +31,7 @@ void Entity::takeDamage(int amount)
 	if (mHp <= 0)
 	{
 		// request to be deleted
-		//ust.objectHandler->markForRemoval(std::make_shared<Entity>(this));
+		destroy = true;
 	}
 }
 

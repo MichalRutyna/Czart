@@ -11,7 +11,6 @@ typedef std::unique_ptr<SDL_Renderer, RendererDeletor> rendererType;
 
 typedef class LTexture LTexture;
 typedef class Kamera Kamera;
-typedef class GameObjectHandler GameObjectHandler;
 
 typedef std::shared_ptr<LTexture> textureType;
 typedef std::shared_ptr<Kamera> cameraType;
@@ -30,9 +29,8 @@ public:
 	static const int LEVEL_WIDTH = 8000;
 	static const int LEVEL_HEIGHT = 8000;
 	static const int DT = 10;
-	const float VELOCITY_MULTIPLIER = 2.0f;
+	static constexpr const float VELOCITY_MULTIPLIER = 2.0f;
 	static const int ORB_SIZE = 150;
-	static std::shared_ptr<GameObjectHandler> objectHandler;
 
 private:
 	UST() {}
@@ -46,6 +44,7 @@ public:
 		static UST ustawienia;
 		return ustawienia;
 	}
+
 };
 
 #endif
