@@ -5,8 +5,9 @@
 #include "GameObjects.h"
 
 typedef std::shared_ptr<_Drawable> drawablePointer;
-typedef std::shared_ptr<Movable> movingPointer;
 typedef std::shared_ptr<_Updatable> updatablePointer;
+typedef std::shared_ptr<_HandlingEvents> eventPointer;
+
 
 
 class GameObjectHandler
@@ -18,6 +19,7 @@ private:
     std::vector<drawablePointer> interfaceLayer;   // interface
 
     std::vector<updatablePointer> updatableObjects;
+    std::vector<eventPointer> eventObjects;
 
 public:
     /*
@@ -31,6 +33,7 @@ public:
     void subscribeInterface(drawablePointer object);
 
     void subscribeUpdatable(updatablePointer object);
+    void subscribeEvents(eventPointer object);
 
     void unsubscribeBackground(drawablePointer object);
     void unsubscribePlayerLayer(drawablePointer object);
@@ -38,6 +41,7 @@ public:
     void unsubscribeInterface(drawablePointer object);
 
     void unsubscribeUpdatable(updatablePointer object);
+    void unsubscribeEvents(eventPointer object);
 
     std::vector<drawablePointer> getBackgroundLayer();
     std::vector<drawablePointer> getPlayerLayer();
@@ -45,6 +49,7 @@ public:
     std::vector<drawablePointer> getInterfaceLayer();
 
     std::vector<updatablePointer> getUpdatableObjects();
+    std::vector<eventPointer> getEventObjects();
 
 
 };

@@ -31,6 +31,11 @@ void GameObjectHandler::subscribeUpdatable(updatablePointer object)
 	updatableObjects.push_back(object);
 }
 
+void GameObjectHandler::subscribeEvents(eventPointer object)
+{
+	eventObjects.push_back(object);
+}
+
 // ----------------------------------------------------------------------------------------------------------------------------
 void GameObjectHandler::unsubscribeBackground(drawablePointer object)
 {
@@ -57,6 +62,11 @@ void GameObjectHandler::unsubscribeUpdatable(updatablePointer object)
 	updatableObjects.erase(std::remove(updatableObjects.begin(), updatableObjects.end(), object), updatableObjects.end());
 }
 
+void GameObjectHandler::unsubscribeEvents(eventPointer object)
+{
+	eventObjects.erase(std::remove(eventObjects.begin(), eventObjects.end(), object), eventObjects.end());
+}
+
 // ----------------------------------------------------------------------------------------------------------------------------
 std::vector<drawablePointer> GameObjectHandler::getBackgroundLayer()
 {
@@ -81,4 +91,9 @@ std::vector<drawablePointer> GameObjectHandler::getInterfaceLayer()
 std::vector<updatablePointer> GameObjectHandler::getUpdatableObjects()
 {
 	return updatableObjects;
+}
+
+std::vector<eventPointer> GameObjectHandler::getEventObjects()
+{
+	return eventObjects;
 }
