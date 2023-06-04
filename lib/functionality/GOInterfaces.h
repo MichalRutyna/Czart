@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../ustawienia.h"
+
 //Abstract interface for all Game objects
 class _GameObject
 {
@@ -35,10 +37,10 @@ protected:
 	SDL_RendererFlip mFlip;
 
 	rendererType* mRenderer;
-	kameraType mKamera;
+	cameraType mKamera;
 	textureType mTexture;
 public:
-	_Drawable(rendererType& renderer, textureType texture, kameraType kamera = nullptr) : mKamera(kamera), mTexture(texture)
+	_Drawable(rendererType& renderer, textureType texture, cameraType kamera = nullptr) : mKamera(kamera), mTexture(texture)
 	{
 		mRenderer = &renderer;
 
@@ -49,6 +51,9 @@ public:
 	}
 
 	virtual void render() = 0;
+	virtual void changeClip(int x, int y, int w, int h);
+	void changeClip(std::shared_ptr<SDL_Rect> ref);
+	// TODO member variables handling
 };
 
 

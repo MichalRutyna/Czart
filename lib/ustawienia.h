@@ -13,7 +13,7 @@ typedef class LTexture LTexture;
 typedef class Kamera Kamera;
 
 typedef std::shared_ptr<LTexture> textureType;
-typedef std::shared_ptr<Kamera> kameraType;
+typedef std::shared_ptr<Kamera> cameraType;
 
 typedef enum {
 	none = 0,
@@ -30,6 +30,7 @@ public:
 	static const int LEVEL_HEIGHT = 8000;
 	static const int DT = 10;
 	const float VELOCITY_MULTIPLIER = 2.0f;
+	static const int ORB_SIZE = 150;
 
 private:
 	UST() {}

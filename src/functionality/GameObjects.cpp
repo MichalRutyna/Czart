@@ -68,7 +68,6 @@ void DGameObject::render()
 {
 	int tempX = mVisibleX;
 	int tempY = mVisibleY;
-	std::cout << tempX << "x" << tempY << " ";
 
 	if (mKamera != nullptr) {
 		tempX -= static_cast<int>(mKamera->getX());
