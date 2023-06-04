@@ -1,5 +1,7 @@
 #include "../../lib/objects/Entity.h"
 
+
+
 int Entity::getHp()
 {
 	return mHp;

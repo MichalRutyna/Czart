@@ -39,9 +39,13 @@ int main(int argc, char* argv[])
     auto kamera = std::make_shared<Kamera>();
 
     // ------------------------Texture initialization----------------------------------------
-    auto stachu_tekstura = std::make_shared<LTexture>();
-    stachu_tekstura->loadFromFile(renderer, "resources/rendertest.png", 300, 100);
-  
+    auto stachu_tekstura_idle = std::make_shared<LTexture>();
+    stachu_tekstura_idle->loadFromFile(renderer, "resources/player_idle.png");
+    auto stachu_tekstura_run = std::make_shared<LTexture>();
+    stachu_tekstura_run->loadFromFile(renderer, "resources/player_run.png");
+    auto stachu_tekstura_attack = std::make_shared<LTexture>();
+    stachu_tekstura_attack->loadFromFile(renderer, "resources/player_attack.png");
+
     auto kask_text = std::make_shared<LTexture>();
     kask_text->loadFromFile(renderer, "resources/czapka.png", 350, 35);
 
@@ -63,7 +67,7 @@ int main(int argc, char* argv[])
     std::cout << "Pomyslnie wczytano tekstury\n";
 
     // ---------------------------Object initialization-------------------------------------
-    auto stachu = std::make_shared<Hero>(renderer, stachu_tekstura, kamera);
+    auto stachu = std::make_shared<Hero>(renderer, stachu_tekstura_idle, stachu_tekstura_run, stachu_tekstura_attack, kamera);
     //auto kask = std::make_shared<Renderable>(renderer, kask_text, kamera);
     //auto mieczyk = std::make_shared<Renderable>(renderer, mieczyk_text, kamera);
     auto background = std::make_shared<Tlo>(renderer, background_txt, kamera);

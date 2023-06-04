@@ -52,6 +52,8 @@ public:
 
 	virtual void render() = 0;
 	virtual void changeClip(int x, int y, int w, int h);
+	virtual void changeFlip(int side);
+	virtual void changeTexture(textureType texture);
 	void changeClip(std::shared_ptr<SDL_Rect> ref);
 	// TODO member variables handling
 };
