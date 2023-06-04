@@ -3,21 +3,17 @@
 #include <SDL.h>
 #include <vector>
 #include "../functionality/GameObjects.h"
+#include "../functionality/Animated.h"
 #include "../objects/Entity.h"
 
-class Orb : public DGameObject
+class Orb : public Animated
 {
 private:
-	static const int CLIPS_SIZE = 30;
 	std::shared_ptr<Entity> trackingObject;
-	std::vector<std::shared_ptr<SDL_Rect>> clips;
-
-	int mFrame = 0;
 
 public:
 	Orb(rendererType&, textureType, int posx, int posy, cameraType = nullptr);
 
-	void render();
 };
 
 class OrbBorder : public DGameObject

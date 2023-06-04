@@ -135,12 +135,15 @@
   <ItemGroup>
     <ClCompile Include="lib\functionality\GOInterfaces.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\functionality\Animated.cpp" />
     <ClCompile Include="src\functionality\GameObjectHandler.cpp" />
     <ClCompile Include="src\functionality\GameObjects.cpp" />
     <ClCompile Include="src\functionality\LTexture.cpp" />
     <ClCompile Include="src\functionality\LTimer.cpp" />
     <ClCompile Include="src\interface\InterfaceElement.cpp" />
     <ClCompile Include="src\objects\Bron.cpp" />
+    <ClCompile Include="src\objects\Diobel.cpp" />
+    <ClCompile Include="src\objects\Enemy.cpp" />
     <ClCompile Include="src\objects\Entity.cpp" />
     <ClCompile Include="src\objects\Hero.cpp" />
     <ClCompile Include="src\objects\PlayerMovable.cpp" />
@@ -154,6 +157,7 @@
     <Image Include="resources\hello_world.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="lib\functionality\Animated.h" />
     <ClInclude Include="lib\functionality\close.h" />
     <ClInclude Include="lib\functionality\destruktory.h" />
     <ClInclude Include="lib\functionality\GameObjectHandler.h" />
@@ -164,6 +168,8 @@
     <ClInclude Include="lib\functionality\LTimer.h" />
     <ClInclude Include="lib\interface\InterfaceElement.h" />
     <ClInclude Include="lib\objects\Bron.h" />
+    <ClInclude Include="lib\objects\Diobel.h" />
+    <ClInclude Include="lib\objects\Enemy.h" />
     <ClInclude Include="lib\objects\Entity.h" />
     <ClInclude Include="lib\objects\Hero.h" />
     <ClInclude Include="lib\objects\PlayerMovable.h" />

@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
     std::cout << "Pomyslnie wczytano tekstury\n";
 
     // ---------------------------Object initialization-------------------------------------
-    auto stachu = std::make_shared<Hero>(renderer, stachu_tekstura, kamera);
+   // auto stachu = std::make_shared<Hero>(renderer, stachu_tekstura, kamera);
     //auto kask = std::make_shared<Renderable>(renderer, kask_text, kamera);
     //auto mieczyk = std::make_shared<Renderable>(renderer, mieczyk_text, kamera);
     auto background = std::make_shared<Tlo>(renderer, background_txt, kamera);
@@ -77,23 +77,24 @@ int main(int argc, char* argv[])
 
     // ---------------------------Creation of object layers--------------------------------
     GameObjectHandler objHandler;
+    ust.objectHandler = std::make_shared<GameObjectHandler>(objHandler);
 
     // drawing
     objHandler.subscribeBackground(background);
-    objHandler.subscribePlayerLayer(stachu);
+    //objHandler.subscribePlayerLayer(stachu);
     objHandler.subscribeInterface(hpOrb);
     objHandler.subscribeInterface(manaOrb);
     objHandler.subscribeInterface(hpOrb_border);
     objHandler.subscribeInterface(manaOrb_border);
 
     // updates
-    objHandler.subscribeUpdatable(stachu);
+    //objHandler.subscribeUpdatable(stachu);
 
     // events
-    objHandler.subscribeEvents(stachu);
+    //objHandler.subscribeEvents(stachu);
 
     // ---------------------------Additional initialization--------------------------------
-    kamera->setFollow(stachu);
+    //kamera->setFollow(stachu);
  
     // ---------------------------Frame handling initialization----------------------------
     double accumulator = 0;

@@ -9,7 +9,7 @@ class Kamera {
 private:
 	float y, x;
 	int w, h;
-	std::shared_ptr<_GameObject> following;
+	std::shared_ptr<_GameObject> following; // TODO weakptr
 
 public:
 	Kamera();
