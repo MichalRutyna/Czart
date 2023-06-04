@@ -14,7 +14,6 @@ public:
 
 	int getHp();
 	int getMana();
-	void attack();
 	Entity(rendererType& renderer, textureType tekstura, cameraType kamera) : DMovable(renderer, tekstura, kamera) {}
 };
 

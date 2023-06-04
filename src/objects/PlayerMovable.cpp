@@ -30,7 +30,15 @@ void PlayerMovable::handleEvent( SDL_Event& e )
 		}
 	}
 	if (mVelX!=0 || mVelY!=0) PlayerMovable::changeTexture(PlayerMovable::texture_run);
-	if (mVelX > 0) PlayerMovable::changeFlip(1);
-	if (mVelX < 0) PlayerMovable::changeFlip(-1);
+	if (mVelX > 0)
+	{
+		facing = 1;
+		PlayerMovable::changeFlip(1);
+	}
+	if (mVelX < 0)
+	{
+		facing = -1;
+		PlayerMovable::changeFlip(-1);
+	}
 	if (mVelX == 0 && mVelY == 0) PlayerMovable::changeTexture(PlayerMovable::texture_idle);
 }

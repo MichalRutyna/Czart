@@ -17,6 +17,7 @@ public:
     textureType texture_idle;
     textureType texture_run;
     textureType texture_attack;
+    int facing = 1;
 };
 
 #endif

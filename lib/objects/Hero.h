@@ -13,7 +13,9 @@ private:
 	static const int CLIPS_SIZE = 8;
 	std::shared_ptr<Entity> trackingObject;
 	std::vector<std::shared_ptr<SDL_Rect>> clips;
+	std::vector<std::shared_ptr<SDL_Rect>> attack_clips;
 	int mFrame = 0;
+	int state = 0;
 public:
 	Hero(rendererType&, textureType, textureType, textureType, cameraType);
 	void render();
