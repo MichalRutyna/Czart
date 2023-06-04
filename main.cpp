@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
     auto background = std::make_shared<Tlo>(renderer, background_txt, kamera);
 
     auto hpOrb_border = std::make_shared<OrbBorder>(renderer, orb_border_text, 98, ust.SCREEN_HEIGHT - 204);
-    auto manapOrb_border = std::make_shared<OrbBorder>(renderer, orb_border_text, 1300, ust.SCREEN_HEIGHT - 204);
+    auto manaOrb_border = std::make_shared<OrbBorder>(renderer, orb_border_text, 1300, ust.SCREEN_HEIGHT - 204);
     auto hpOrb = std::make_shared<Orb>(renderer, hp_texture, 100, ust.SCREEN_HEIGHT - 202);
     auto manaOrb = std::make_shared<Orb>(renderer, mana_texture, 1300, ust.SCREEN_HEIGHT - 202);
 
@@ -83,6 +83,8 @@ int main(int argc, char* argv[])
     objHandler.subscribePlayerLayer(stachu);
     objHandler.subscribeInterface(hpOrb);
     objHandler.subscribeInterface(manaOrb);
+    objHandler.subscribeInterface(hpOrb_border);
+    objHandler.subscribeInterface(manaOrb_border);
 
     // updates
     objHandler.subscribeUpdatable(stachu);

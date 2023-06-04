@@ -10,7 +10,7 @@ class Orb : public DGameObject
 private:
 	static const int CLIPS_SIZE = 30;
 	std::shared_ptr<Entity> trackingObject;
-	std::vector<std::shared_ptr<SDL_Rect>> clips((size_t)30, std::make_shared<SDL_Rect>());
+	std::vector<std::shared_ptr<SDL_Rect>> clips;
 
 	int mFrame = 0;
 
