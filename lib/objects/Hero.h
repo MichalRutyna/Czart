@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include <string>
 
-class Hero : public PlayerMovable, public Entity
+class Hero : public PlayerMovable
 {
 private:
 	const std::string NAME = "Stachu";
@@ -12,4 +12,3 @@ private:
 public:
 	Hero(rendererType&, textureType, cameraType);
 };
-

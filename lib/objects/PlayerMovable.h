@@ -6,11 +6,12 @@
 #include "../ustawienia.h"
 #include "../functionality/LTexture.h"
 #include "../functionality/GameObjects.h"
+#include "Entity.h"
 
-class PlayerMovable : public DMovable, public _HandlingEvents
+class PlayerMovable : public Entity, public _HandlingEvents
 {
 public:
-    PlayerMovable(rendererType&, textureType, cameraType);
+    PlayerMovable(rendererType& r, textureType t, cameraType c) : Entity(r, t, c) {}
 
     void handleEvent(SDL_Event&);
 
