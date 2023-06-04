@@ -7,7 +7,7 @@
 
 static UST& ust = UST::pobierz_ustawienia();
 
-// Movable Game object
+// Movable Game object - special case of updatable introduced to provide a default class for moving objects
 class Movable : public _GameObject, public _Updatable
 {
 protected:
@@ -35,7 +35,7 @@ public:
 class DMovable : public Movable, public _Drawable
 {
 public:
-	DMovable(rendererType& renderer, textureType texture, kameraType kamera = nullptr) : _Drawable(renderer, texture, kamera) {};
+	DMovable(rendererType& r, textureType t, cameraType c = nullptr) : _Drawable(r, t, c) {}
 
 	virtual void render();
 };
@@ -54,13 +54,16 @@ public:
 class DGameObject : public _GameObject, public _Drawable
 {
 public:
-	DGameObject(rendererType& renderer, textureType texture, kameraType kamera = nullptr) : _Drawable(renderer, texture, kamera) {};
+	DGameObject(rendererType& renderer, textureType texture, cameraType camera = nullptr) : _Drawable(renderer, texture, camera) {};
 
 	virtual void render();
 };
 
 // Updatable and Drawable Game object
+// Has to implement void update(int dt) and void interpolate(double alpha)
+// Inherits default implementation of render - constructor requires (renderer, texture, camera)
 class DUGameObject : public DGameObject, public _Updatable
 {
-
+public:
+	DUGameObject(rendererType& r, textureType t, cameraType c) : DGameObject(r, t, c) {}
 };

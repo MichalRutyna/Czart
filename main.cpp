@@ -6,9 +6,10 @@
 #include "lib/functionality/close.h"
 #include "lib/functionality/GameObjectHandler.h"
 #include "lib/rendering/Kamera.h"
-#include "lib/Tlo.h"
+#include "lib/objects/Tlo.h"
+#include "lib/interface/InterfaceElement.h"
 
-#include "lib/PlayerMovable.h"
+#include "lib/objects/Hero.h"
 
 #include <iostream>
 #include <vector>
@@ -24,7 +25,7 @@ int main(int argc, char* argv[])
     // Initialization of window and renderer objects
     bool initialized = init(ust, window, renderer);
     if (!initialized) {
-        std::cout << "Wystapil bl¹d przy inicjalizacji programu" << std::endl;
+        std::cout << "Wystapil blad przy inicjalizacji programu" << std::endl;
         return 0;
     }
 
@@ -50,46 +51,40 @@ int main(int argc, char* argv[])
     auto background_txt = std::make_shared<LTexture>();
     background_txt->loadFromFile(renderer, "resources/background.png");
 
+    auto orb_border_text = std::make_shared<LTexture>();
+    orb_border_text->loadFromFile(renderer, "resources/obramowka.png", ust.ORB_SIZE + 5, ust.ORB_SIZE + 5);
+
+    auto hp_texture = std::make_shared<LTexture>();
+    hp_texture->loadFromFile(renderer, "resources/kula_hp.png", 30 * ust.ORB_SIZE, ust.ORB_SIZE);
+
+    auto mana_texture = std::make_shared<LTexture>();
+    mana_texture->loadFromFile(renderer, "resources/kula_mana.png", 30 * ust.ORB_SIZE, ust.ORB_SIZE);
+
     std::cout << "Pomyslnie wczytano tekstury\n";
 
-    // -------------------------------Kule------------------------------------------------
-    int rozmiar_kuli = 150;
-
-    auto orb_border_text = std::make_shared<LTexture>();
-    orb_border_text->loadFromFile(renderer, "resources/obramowka.png", rozmiar_kuli+5, rozmiar_kuli+5);
-    auto orb_border = std::make_shared<Renderable>(renderer, orb_border_text);
-
-    SDL_Rect hpClips[30];
-    LTexture hp_texture, mana_texture;
-    
-    hp_texture.loadFromFile(renderer, "resources/kula_hp.png", 30*rozmiar_kuli, rozmiar_kuli);
-    mana_texture.loadFromFile(renderer, "resources/kula_mana.png", 30 * rozmiar_kuli, rozmiar_kuli);
-
-
-    for (int i = 0; i < 30; i++)
-    {
-        hpClips[i].x = rozmiar_kuli *i;
-        hpClips[i].y = 0;
-        hpClips[i].w = rozmiar_kuli;
-
-        hpClips[i].h = rozmiar_kuli;
-    }
-
     // ---------------------------Object initialization-------------------------------------
-    auto stachu = std::make_shared<PlayerMovable>(renderer, stachu_tekstura, kamera);
+    auto stachu = std::make_shared<Hero>(renderer, stachu_tekstura, kamera);
     //auto kask = std::make_shared<Renderable>(renderer, kask_text, kamera);
     //auto mieczyk = std::make_shared<Renderable>(renderer, mieczyk_text, kamera);
     auto background = std::make_shared<Tlo>(renderer, background_txt, kamera);
 
+    auto hpOrb_border = std::make_shared<OrbBorder>(renderer, orb_border_text, 98, ust.SCREEN_HEIGHT - 204);
+    auto manapOrb_border = std::make_shared<OrbBorder>(renderer, orb_border_text, 1300, ust.SCREEN_HEIGHT - 204);
+    auto hpOrb = std::make_shared<Orb>(renderer, hp_texture, 100, ust.SCREEN_HEIGHT - 202);
+    auto manaOrb = std::make_shared<Orb>(renderer, mana_texture, 1300, ust.SCREEN_HEIGHT - 202);
+
     std::cout << "Pomyslnie zainicjalizowano obiekty" << std::endl;
 
-    int hp_frame = 0;
-    int i = 0;
     // ---------------------------Creation of object layers--------------------------------
     GameObjectHandler objHandler;
 
+    // drawing
     objHandler.subscribeBackground(background);
     objHandler.subscribePlayerLayer(stachu);
+    objHandler.subscribeInterface(hpOrb);
+    objHandler.subscribeInterface(manaOrb);
+
+    // updates
     objHandler.subscribeUpdatable(stachu);
 
     // ---------------------------Additional initialization--------------------------------
@@ -106,7 +101,6 @@ int main(int argc, char* argv[])
   
     while (!quit)
     {
-        std::shared_ptr<SDL_Rect> currentClip = std::make_shared<SDL_Rect>(hpClips[hp_frame / 5]);
         while (SDL_PollEvent(&e) != 0)
         {
             //User requests quit
@@ -114,18 +108,15 @@ int main(int argc, char* argv[])
             {
                 quit = true;
             }
-            if (e.type == SDL_KEYDOWN)
-            {
-                i++;
-            }
 
             stachu->handleEvent(e);
+            // TODO event list
         }
 
         // -----------------------------Movement------------------------------------------------
         end_time = SDL_GetPerformanceCounter();
         time_taken = ((double)(end_time - start_time) / (double)PerfCountFrequency) * 1000.0;
-        //std::cout << 1.0 / (time_taken / 1000.0) <<  " ";
+        //std::cout << 1.0 / (time_taken / 1000.0) <<  " "; // FPS
         accumulator += time_taken;
         start_time = end_time;
 
@@ -162,16 +153,11 @@ int main(int argc, char* argv[])
         {
             element->render();
         }
-      
-        currentClip->y = 0 + i * 20;
-        currentClip->h = 150 - i * 20;
-        
-        hp_texture.render(renderer, 100, ust.SCREEN_HEIGHT - 202 + i*20, currentClip);
-        mana_texture.render(renderer, 1300, ust.SCREEN_HEIGHT - 202 + i*20, currentClip);
-        hp_frame++;
-        if (hp_frame/5 >= 30) hp_frame = 0;
-        orb_border->render(98, ust.SCREEN_HEIGHT - 204); // hp
-        orb_border->render(1300, ust.SCREEN_HEIGHT - 204); // mana
+
+        for (auto& element : objHandler.getInterfaceLayer())
+        {
+            element->render();
+        }
       
         //kask->render(stachu->getPosX()-25, stachu->getPosY()-10);
         //mieczyk->render(stachu->getPosX()+55, stachu->getPosY()-50);

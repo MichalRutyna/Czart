@@ -133,16 +133,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Bron.cpp" />
+    <ClCompile Include="lib\functionality\GOInterfaces.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\functionality\GameObjectHandler.cpp" />
     <ClCompile Include="src\functionality\GameObjects.cpp" />
     <ClCompile Include="src\functionality\LTexture.cpp" />
     <ClCompile Include="src\functionality\LTimer.cpp" />
     <ClCompile Include="src\interface\InterfaceElement.cpp" />
-    <ClCompile Include="src\PlayerMovable.cpp" />
+    <ClCompile Include="src\objects\Bron.cpp" />
+    <ClCompile Include="src\objects\Entity.cpp" />
+    <ClCompile Include="src\objects\Hero.cpp" />
+    <ClCompile Include="src\objects\PlayerMovable.cpp" />
+    <ClCompile Include="src\objects\Tlo.cpp" />
     <ClCompile Include="src\rendering\Kamera.cpp" />
-    <ClCompile Include="src\Tlo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\background.png" />
@@ -151,7 +154,6 @@
     <Image Include="resources\hello_world.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lib\Bron.h" />
     <ClInclude Include="lib\functionality\close.h" />
     <ClInclude Include="lib\functionality\destruktory.h" />
     <ClInclude Include="lib\functionality\GameObjectHandler.h" />
@@ -161,11 +163,13 @@
     <ClInclude Include="lib\functionality\LTexture.h" />
     <ClInclude Include="lib\functionality\LTimer.h" />
     <ClInclude Include="lib\interface\InterfaceElement.h" />
-    <ClInclude Include="lib\PlayerMovable.h" />
+    <ClInclude Include="lib\objects\Bron.h" />
+    <ClInclude Include="lib\objects\Entity.h" />
+    <ClInclude Include="lib\objects\Hero.h" />
+    <ClInclude Include="lib\objects\PlayerMovable.h" />
+    <ClInclude Include="lib\objects\Tlo.h" />
     <ClInclude Include="lib\rendering\Kamera.h" />
-    <ClInclude Include="lib\Tlo.h" />
     <ClInclude Include="lib\ustawienia.h" />
-    <ClInclude Include="resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

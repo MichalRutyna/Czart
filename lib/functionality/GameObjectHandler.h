@@ -15,6 +15,7 @@ private:
     std::vector<drawablePointer> backgroundLayer;   // background only
     std::vector<drawablePointer> playerLayer;       // player, monsters, walls
     std::vector<drawablePointer> foregroundLayer;   // things which should obstruct view
+    std::vector<drawablePointer> interfaceLayer;   // interface
 
     std::vector<updatablePointer> updatableObjects;
 
@@ -27,20 +28,22 @@ public:
     void subscribeBackground(drawablePointer object);
     void subscribePlayerLayer(drawablePointer object);
     void subscribeForeground(drawablePointer object);
+    void subscribeInterface(drawablePointer object);
 
     void subscribeUpdatable(updatablePointer object);
 
     void unsubscribeBackground(drawablePointer object);
     void unsubscribePlayerLayer(drawablePointer object);
     void unsubscribeForeground(drawablePointer object);
+    void unsubscribeInterface(drawablePointer object);
 
     void unsubscribeUpdatable(updatablePointer object);
 
     std::vector<drawablePointer> getBackgroundLayer();
     std::vector<drawablePointer> getPlayerLayer();
     std::vector<drawablePointer> getForegroundLayer();
+    std::vector<drawablePointer> getInterfaceLayer();
 
-    std::vector<movingPointer> getMovingObjects();
     std::vector<updatablePointer> getUpdatableObjects();
 
 

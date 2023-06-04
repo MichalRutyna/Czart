@@ -1,8 +1,7 @@
-#include "../lib/PlayerMovable.h"
+#include "../../lib/objects/PlayerMovable.h"
 
 
-PlayerMovable::PlayerMovable(rendererType& renderer, textureType tekstura, kameraType kamera) : NAME("Stachu Jones"),
-	DMovable(renderer, tekstura, kamera)
+PlayerMovable::PlayerMovable(rendererType& renderer, textureType tekstura, cameraType kamera) : DMovable(renderer, tekstura, kamera)
 {
 	mWidth = tekstura->width();
 	mHeight = tekstura->height();

@@ -21,11 +21,17 @@ void GameObjectHandler::subscribeForeground(drawablePointer object)
 	foregroundLayer.push_back(object);
 }
 
+void GameObjectHandler::subscribeInterface(drawablePointer object)
+{
+	interfaceLayer.push_back(object);
+}
+
 void GameObjectHandler::subscribeUpdatable(updatablePointer object)
 {
 	updatableObjects.push_back(object);
 }
 
+// ----------------------------------------------------------------------------------------------------------------------------
 void GameObjectHandler::unsubscribeBackground(drawablePointer object)
 {
 	backgroundLayer.erase(std::remove(backgroundLayer.begin(), backgroundLayer.end(), object), backgroundLayer.end());
@@ -41,11 +47,17 @@ void GameObjectHandler::unsubscribeForeground(drawablePointer object)
 	foregroundLayer.erase(std::remove(foregroundLayer.begin(), foregroundLayer.end(), object), foregroundLayer.end());
 }
 
+void GameObjectHandler::unsubscribeInterface(drawablePointer object)
+{
+	interfaceLayer.erase(std::remove(interfaceLayer.begin(), interfaceLayer.end(), object), interfaceLayer.end());
+}
+
 void GameObjectHandler::unsubscribeUpdatable(updatablePointer object)
 {
 	updatableObjects.erase(std::remove(updatableObjects.begin(), updatableObjects.end(), object), updatableObjects.end());
 }
 
+// ----------------------------------------------------------------------------------------------------------------------------
 std::vector<drawablePointer> GameObjectHandler::getBackgroundLayer()
 {
 	return backgroundLayer;
@@ -59,6 +71,11 @@ std::vector<drawablePointer> GameObjectHandler::getPlayerLayer()
 std::vector<drawablePointer> GameObjectHandler::getForegroundLayer()
 {
 	return foregroundLayer;
+}
+
+std::vector<drawablePointer> GameObjectHandler::getInterfaceLayer()
+{
+	return interfaceLayer;
 }
 
 std::vector<updatablePointer> GameObjectHandler::getUpdatableObjects()
