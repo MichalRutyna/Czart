@@ -11,7 +11,7 @@
 class PlayerMovable : public Entity, public _HandlingEvents
 {
 public:
-    PlayerMovable(rendererType& r, textureType t, cameraType c) : Entity(r, t, c) {}
+    PlayerMovable(rendererType& r, textureType t, cameraType c = nullptr) : Entity(r, t, c) {}
 
     void handleEvent(SDL_Event&);
 

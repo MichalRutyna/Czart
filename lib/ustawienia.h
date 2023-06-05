@@ -29,7 +29,7 @@ public:
 	static const int LEVEL_WIDTH = 8000;
 	static const int LEVEL_HEIGHT = 8000;
 	static const int DT = 10;
-	const float VELOCITY_MULTIPLIER = 2.0f;
+	static constexpr const float VELOCITY_MULTIPLIER = 2.0f;
 	static const int ORB_SIZE = 150;
 
 private:
@@ -44,6 +44,7 @@ public:
 		static UST ustawienia;
 		return ustawienia;
 	}
+
 };
 
 #endif

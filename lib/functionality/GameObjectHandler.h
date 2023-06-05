@@ -2,6 +2,8 @@
 
 #include <memory>
 #include <vector>
+#include <queue>
+#include <list>
 #include "GameObjects.h"
 
 typedef std::shared_ptr<_Drawable> drawablePointer;
@@ -20,6 +22,9 @@ private:
 
     std::vector<updatablePointer> updatableObjects;
     std::vector<eventPointer> eventObjects;
+    
+    std::queue<std::shared_ptr<_GameObject>, std::list<std::shared_ptr<_GameObject>>> objectsToRemove;
+    std::queue<std::shared_ptr<_GameObject>, std::list<std::shared_ptr<_GameObject>>> objectsToAdd;
 
 public:
     /*
@@ -51,6 +56,10 @@ public:
     std::vector<updatablePointer> getUpdatableObjects();
     std::vector<eventPointer> getEventObjects();
 
+    void markForRemoval(std::shared_ptr<_GameObject> object);
+    std::shared_ptr<_GameObject> popRemoval();
 
+    void markForAddition(std::shared_ptr<_GameObject> object);
+    std::shared_ptr<_GameObject> popAddition();
 };
 

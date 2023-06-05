@@ -97,3 +97,29 @@ std::vector<eventPointer> GameObjectHandler::getEventObjects()
 {
 	return eventObjects;
 }
+
+
+void GameObjectHandler::markForRemoval(std::shared_ptr<_GameObject> object)
+{
+	objectsToRemove.push(object);
+}
+
+std::shared_ptr<_GameObject> GameObjectHandler::popRemoval()
+{
+	if (objectsToRemove.empty()) return nullptr;
+	std::shared_ptr<_GameObject>& temp = objectsToRemove.front();
+	objectsToRemove.pop();
+	return temp;
+}
+
+void GameObjectHandler::markForAddition(std::shared_ptr<_GameObject> object)
+{
+	objectsToAdd.push(object);
+}
+
+std::shared_ptr<_GameObject> GameObjectHandler::popAddition()
+{
+	std::shared_ptr<_GameObject>& temp = objectsToAdd.front();
+	objectsToAdd.pop();
+	return temp;
+}
