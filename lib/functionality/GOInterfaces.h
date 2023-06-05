@@ -63,6 +63,8 @@ public:
 class _Updatable
 {
 public:
+	bool destroy = false;
+
 	_Updatable() {};
 
 	virtual void update(const int deltaTime) = 0;

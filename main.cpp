@@ -136,6 +136,10 @@ int main(int argc, char* argv[])
             for (auto& object : objHandler.getUpdatableObjects())
             {
                 object->update(ust.DT);
+                if (object->destroy)
+                {
+                    objHandler.markForRemoval(std::make_shared <_GameObject>(dynamic_cast<_GameObject&>(*object)));
+                }
             }
             accumulator -= ust.DT;
         }
@@ -144,6 +148,15 @@ int main(int argc, char* argv[])
         {
             object->interpolate(alpha);
         }
+
+        //----------------------------Deletion of redundant objects------------------------
+        while (true)
+        {
+            auto object = objHandler.popRemoval();
+            if (object == nullptr) break;
+            delete object.get();
+        }
+
         // -----------------------------Render----------------------------------------------
 
         kamera->update();
