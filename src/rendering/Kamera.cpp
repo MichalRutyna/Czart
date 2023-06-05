@@ -25,7 +25,7 @@ void Kamera::update()
     {
         return;
     }
-    x = (following->getX() + following->getWidth() / 2.0f) - ust.SCREEN_WIDTH / 2.0f; //przesun kamere na stacha
+    x = (following->getX() + following->getWidth()/8 / 2.0f) - ust.SCREEN_WIDTH / 2.0f; //przesun kamere na stacha
     y = (following->getY() + following->getHeight() / 2.0f) - ust.SCREEN_HEIGHT / 2.0f;
 
     if (x < 0)

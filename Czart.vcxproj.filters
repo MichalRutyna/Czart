@@ -140,4 +140,7 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="NewFile.txt" />
+  </ItemGroup>
 </Project>

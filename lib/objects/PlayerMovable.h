@@ -11,10 +11,13 @@
 class PlayerMovable : public Entity, public _HandlingEvents
 {
 public:
-    PlayerMovable(rendererType& r, textureType t, cameraType c = nullptr) : Entity(r, t, c) {}
+    PlayerMovable(rendererType& r, textureType t_i, textureType t_r, textureType t_a, cameraType c);
 
     void handleEvent(SDL_Event&);
-
+    textureType texture_idle;
+    textureType texture_run;
+    textureType texture_attack;
+    int facing = 1;
 };
 
 #endif

@@ -1,5 +1,6 @@
 #include "../../lib/objects/Entity.h"
 
+
 Entity::Entity(rendererType& renderer, textureType tekstura, cameraType kamera) : DMovable(renderer, tekstura, kamera)
 {
 	

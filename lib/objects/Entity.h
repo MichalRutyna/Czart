@@ -20,6 +20,7 @@ public:
 
 	int getHp();
 	int getMana();
+	Entity(rendererType& renderer, textureType tekstura, cameraType kamera) : DMovable(renderer, tekstura, kamera) {}
 
 	void takeDamage(int amount);
 	void manaCost(int amount);

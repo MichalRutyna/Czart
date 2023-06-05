@@ -24,3 +24,14 @@ void _Drawable::changeClip(std::shared_ptr<SDL_Rect> ref)
 {
 	mClip = ref;
 }
+
+void _Drawable::changeFlip(int side)
+{
+	if(side == -1) mFlip = SDL_FLIP_HORIZONTAL;
+	if(side == 1) mFlip = SDL_FLIP_NONE;
+}
+
+void _Drawable::changeTexture(textureType texture)
+{
+	mTexture = texture;
+}

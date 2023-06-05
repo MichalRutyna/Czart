@@ -29,9 +29,9 @@ void Movable::handleCollisions()
 	{
 		mInternalX = 0;
 	}
-	else if (mInternalX + mWidth > ust.LEVEL_WIDTH)
+	else if (mInternalX + mWidth/8 > ust.LEVEL_WIDTH)
 	{
-		mInternalX = static_cast<double>(ust.LEVEL_WIDTH - mWidth);
+		mInternalX = static_cast<double>(ust.LEVEL_WIDTH - mWidth/8);
 	}
 
 	if (mInternalY < 0)
