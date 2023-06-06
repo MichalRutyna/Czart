@@ -6,7 +6,7 @@
 #include "../functionality/Animated.h"
 #include "../objects/Entity.h"
 
-class Orb : public Animated
+class Orb : public Animated, public DGameObject
 {
 private:
 	std::shared_ptr<Entity> trackingObject;

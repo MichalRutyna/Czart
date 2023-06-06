@@ -2,7 +2,7 @@
 
 Hero::Hero(rendererType& r, textureType t_i, textureType t_r, textureType t_a,  cameraType c) : PlayerMovable(r, t_i, t_r, t_a, c)
 {
-	mWidth = t_i->width();
+	mWidth = t_i->width() / 8;
 	mHeight = t_i->height();
 	for (int i = 0; i < CLIPS_SIZE; i++)
     {

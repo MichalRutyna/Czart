@@ -10,6 +10,7 @@
 #include "lib/interface/InterfaceElement.h"
 
 #include "lib/objects/Hero.h"
+#include "lib/objects/Enemy.h"
 
 #include <iostream>
 #include <vector>
@@ -46,6 +47,13 @@ int main(int argc, char* argv[])
     auto stachu_tekstura_attack = std::make_shared<LTexture>();
     stachu_tekstura_attack->loadFromFile(renderer, "resources/player_attack.png");
 
+    auto enemy_texture_idle = std::make_shared<LTexture>();
+    enemy_texture_idle->loadFromFile(renderer, "resources/enemy_idle.png", 924, 139);
+    auto enemy_texture_run = std::make_shared<LTexture>();
+    enemy_texture_run->loadFromFile(renderer, "resources/enemy_run.png", 924, 139);
+    auto enemy_texture_attack = std::make_shared<LTexture>();
+    enemy_texture_attack->loadFromFile(renderer, "resources/enemy_attack.png", 1113, 139);
+
     auto kask_text = std::make_shared<LTexture>();
     kask_text->loadFromFile(renderer, "resources/czapka.png", 350, 35);
 
@@ -77,6 +85,8 @@ int main(int argc, char* argv[])
     auto hpOrb = std::make_shared<Orb>(renderer, hp_texture, 100, ust.SCREEN_HEIGHT - 202);
     auto manaOrb = std::make_shared<Orb>(renderer, mana_texture, 1300, ust.SCREEN_HEIGHT - 202);
 
+    auto testowy_diobel = std::make_shared<Enemy>(renderer, enemy_texture_idle, enemy_texture_run, enemy_texture_attack, kamera);
+
     std::cout << "Pomyslnie zainicjalizowano obiekty" << std::endl;
 
     // ---------------------------Creation of object layers--------------------------------
@@ -89,15 +99,18 @@ int main(int argc, char* argv[])
     objHandler.subscribeInterface(manaOrb);
     objHandler.subscribeInterface(hpOrb_border);
     objHandler.subscribeInterface(manaOrb_border);
+    objHandler.subscribePlayerLayer(testowy_diobel);
 
     // updates
     objHandler.subscribeUpdatable(stachu);
+    objHandler.subscribeUpdatable(testowy_diobel);
 
     // events
     objHandler.subscribeEvents(stachu);
 
     // ---------------------------Additional initialization--------------------------------
     kamera->setFollow(stachu);
+    testowy_diobel->setHero(stachu);
  
     // ---------------------------Frame handling initialization----------------------------
     double accumulator = 0;

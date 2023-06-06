@@ -6,9 +6,9 @@
 #include "GameObjects.h"
 #include "../ustawienia.h"
 
-class Animated : public DGameObject
+class Animated
 {
-private:
+protected:
 	static const int CLIPS_SIZE = 30;
 	std::vector<std::shared_ptr<SDL_Rect>> clips;
 
@@ -19,7 +19,7 @@ protected:
 	int mCLIP_HEIGHT;
 
 public:
-	Animated(rendererType& r, textureType t, int clipW, int clipH, cameraType c = nullptr);
+	Animated(int clipW, int clipH);
 	void clipUpdate();
 
 };
