@@ -3,6 +3,7 @@
 
 Entity::Entity(rendererType& renderer, textureType tekstura, cameraType kamera) : DMovable(renderer, tekstura, kamera)
 {
+	std::cout << "stworzono entity";
 }
 
 Entity::~Entity()
@@ -20,18 +21,36 @@ int Entity::getHp()
 	return mHp;
 }
 
+int Entity::getMaxHp()
+{
+	return MAX_HP;
+}
+
 int Entity::getMana()
 {
 	return mMana;
 }
 
-void Entity::takeDamage(int amount)
+int Entity::getMaxMana()
+{
+	return MAX_MANA;
+}
+
+void Entity::takeDamage(int amount, int side)
 {
 	mHp -= amount;
 	if (mHp <= 0)
 	{
 		// request to be deleted
 		destroy = true;
+	}
+	if (side == 1)
+	{
+		mInternalX -= KNOCKBACK;
+	}
+	else
+	{
+		mInternalX += KNOCKBACK;
 	}
 }
 

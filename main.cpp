@@ -48,9 +48,9 @@ int main(int argc, char* argv[])
     stachu_tekstura_attack->loadFromFile(renderer, "resources/player_attack.png");
 
     auto enemy_texture_idle = std::make_shared<LTexture>();
-    enemy_texture_idle->loadFromFile(renderer, "resources/enemy_idle.png", 924, 139);
+    enemy_texture_idle->loadFromFile(renderer, "resources/enemy_idle.png", 920, 139);
     auto enemy_texture_run = std::make_shared<LTexture>();
-    enemy_texture_run->loadFromFile(renderer, "resources/enemy_run.png", 924, 139);
+    enemy_texture_run->loadFromFile(renderer, "resources/enemy_run.png", 920, 139);
     auto enemy_texture_attack = std::make_shared<LTexture>();
     enemy_texture_attack->loadFromFile(renderer, "resources/enemy_attack.png", 1113, 139);
 
@@ -82,10 +82,9 @@ int main(int argc, char* argv[])
 
     auto hpOrb_border = std::make_shared<OrbBorder>(renderer, orb_border_text, 98, ust.SCREEN_HEIGHT - 204);
     auto manaOrb_border = std::make_shared<OrbBorder>(renderer, orb_border_text, 1300, ust.SCREEN_HEIGHT - 204);
-    auto hpOrb = std::make_shared<Orb>(renderer, hp_texture, 100, ust.SCREEN_HEIGHT - 202);
-    auto manaOrb = std::make_shared<Orb>(renderer, mana_texture, 1300, ust.SCREEN_HEIGHT - 202);
+    auto hpOrb = std::make_shared<Orb>(renderer, hp_texture, 100, ust.SCREEN_HEIGHT - 202, 1, stachu);
+    auto manaOrb = std::make_shared<Orb>(renderer, mana_texture, 1300, ust.SCREEN_HEIGHT - 202, 2, stachu);
 
-    auto testowy_diobel = std::make_shared<Enemy>(renderer, enemy_texture_idle, enemy_texture_run, enemy_texture_attack, kamera);
 
     std::cout << "Pomyslnie zainicjalizowano obiekty" << std::endl;
 
@@ -99,24 +98,22 @@ int main(int argc, char* argv[])
     objHandler.subscribeInterface(manaOrb);
     objHandler.subscribeInterface(hpOrb_border);
     objHandler.subscribeInterface(manaOrb_border);
-    objHandler.subscribePlayerLayer(testowy_diobel);
 
     // updates
     objHandler.subscribeUpdatable(stachu);
-    objHandler.subscribeUpdatable(testowy_diobel);
 
     // events
     objHandler.subscribeEvents(stachu);
 
     // ---------------------------Additional initialization--------------------------------
     kamera->setFollow(stachu);
-    testowy_diobel->setHero(stachu);
  
     // ---------------------------Frame handling initialization----------------------------
     double accumulator = 0;
     uint64_t PerfCountFrequency = SDL_GetPerformanceFrequency();
     uint64_t start_time = SDL_GetPerformanceCounter(), end_time = 0; 
     double time_taken;
+    int i = 0;
 
     // ------------------------------------------------------------------------------------
     std::cout << "Rozpoczynam petle zdarzen\n";
@@ -195,17 +192,17 @@ int main(int argc, char* argv[])
         {
             element->render();
         }
-      
-        //kask->render(stachu->getPosX()-25, stachu->getPosY()-10);
-        //mieczyk->render(stachu->getPosX()+55, stachu->getPosY()-50);
-
+        if (i % 20 == 0)
+        {
+            auto testowy_diobel = std::make_shared<Enemy>(renderer, enemy_texture_idle, enemy_texture_run, enemy_texture_attack, kamera);
+            objHandler.subscribePlayerLayer(testowy_diobel);
+            objHandler.subscribeUpdatable(testowy_diobel);
+            testowy_diobel->setHero(stachu);
+        }
         SDL_RenderPresent(renderer.get()); //update
-
+        i++;
         // -----------------------------------------------------------------------------------
-        
-       // kask->change_angle(i);
-       // stachu->change_angle(i);
-        //i+=0.1;
+ 
     }
     close();
     return 0;
