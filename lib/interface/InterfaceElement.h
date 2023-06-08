@@ -6,15 +6,20 @@
 #include "../functionality/Animated.h"
 #include "../objects/Entity.h"
 
-class Orb : public Animated
+class Orb : public Animated, public DGameObject
 {
 private:
 	std::shared_ptr<Entity> trackingObject;
+	float fill = 1.0f;
+	int trackedResource = 0;
+
+	int setX = 0, setY = 0;
 
 public:
-	Orb(rendererType&, textureType, int posx, int posy, cameraType = nullptr);
+	Orb(rendererType& r, textureType t, int posx, int posy, int resource, std::shared_ptr<Entity> tracked, cameraType c = nullptr);
 
 	void render();
+	void check_levels();
 };
 
 class OrbBorder : public DGameObject

@@ -2,7 +2,18 @@
 
 Hero::Hero(rendererType& r, textureType t_i, textureType t_r, textureType t_a,  cameraType c) : PlayerMovable(r, t_i, t_r, t_a, c)
 {
-	mWidth = t_i->width();
+    mInternalX = 2000;
+    mInternalY = 2000;
+
+    MAX_HP = 100;
+    mHp = 100;
+
+    MAX_MANA = 100;
+    mMana = 100;
+
+    ATTACK = 20;
+
+	mWidth = t_i->width() / 8;
 	mHeight = t_i->height();
 	for (int i = 0; i < CLIPS_SIZE; i++)
     {
@@ -22,7 +33,6 @@ Hero::Hero(rendererType& r, textureType t_i, textureType t_r, textureType t_a,  
         attack_clips[i]->w = 318;
         attack_clips[i]->h = 278;
     }
-	mHp = 0;
 }
 
 void Hero::render()

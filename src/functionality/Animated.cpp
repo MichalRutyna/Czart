@@ -1,7 +1,7 @@
 #include "../../lib/functionality/Animated.h"
 
 
-Animated::Animated(rendererType& r, textureType t, int clipW, int clipH, cameraType c) : mCLIP_WIDTH(clipW), mCLIP_HEIGHT(clipH), DGameObject(r, t, c)
+Animated::Animated(int clipW, int clipH) : mCLIP_WIDTH(clipW), mCLIP_HEIGHT(clipH)
 {
     for (int i = 0; i < CLIPS_SIZE; i++)
     {
@@ -17,7 +17,5 @@ Animated::Animated(rendererType& r, textureType t, int clipW, int clipH, cameraT
 
 void Animated::clipUpdate()
 {
-    DGameObject::changeClip(clips[mFrame / 5]);
-    mFrame++;
-    if (mFrame / 5 >= 30) mFrame = 0;
+    std::cout << "ee";
 }

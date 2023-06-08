@@ -11,7 +11,7 @@ static UST& ust = UST::pobierz_ustawienia();
 class Movable : public _GameObject, public _Updatable
 {
 protected:
-	double VELOCITY = 0.7;
+	double VELOCITY = 1;
 
 	double mVelX = 0, mVelY = 0;
 
