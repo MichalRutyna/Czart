@@ -16,11 +16,6 @@ void GameObjectHandler::subscribePlayerLayer(drawablePointer object)
 	playerLayer.push_back(object);
 }
 
-void GameObjectHandler::subscribeEnemyLayer(enemyPointer object)
-{
-	enemyLayer.push_back(object);
-}
-
 void GameObjectHandler::subscribeForeground(drawablePointer object)
 {
 	foregroundLayer.push_back(object);
@@ -52,11 +47,6 @@ void GameObjectHandler::unsubscribePlayerLayer(drawablePointer object)
 	playerLayer.erase(std::remove(playerLayer.begin(), playerLayer.end(), object), playerLayer.end());
 }
 
-void GameObjectHandler::unsubscribeEnemyLayer(enemyPointer object)
-{
-	enemyLayer.erase(std::remove(enemyLayer.begin(), enemyLayer.end(), object), enemyLayer.end());
-}
-
 void GameObjectHandler::unsubscribeForeground(drawablePointer object)
 {
 	foregroundLayer.erase(std::remove(foregroundLayer.begin(), foregroundLayer.end(), object), foregroundLayer.end());
@@ -86,11 +76,6 @@ std::vector<drawablePointer> GameObjectHandler::getBackgroundLayer()
 std::vector<drawablePointer> GameObjectHandler::getPlayerLayer()
 {
 	return playerLayer;
-}
-
-std::vector<enemyPointer> GameObjectHandler::getEnemyLayer()
-{
-	return enemyLayer;
 }
 
 std::vector<drawablePointer> GameObjectHandler::getForegroundLayer()

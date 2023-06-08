@@ -5,12 +5,12 @@
 #include <queue>
 #include <list>
 #include "GameObjects.h"
-#include "../objects/Entity.h"
 
 typedef std::shared_ptr<_Drawable> drawablePointer;
 typedef std::shared_ptr<_Updatable> updatablePointer;
 typedef std::shared_ptr<_HandlingEvents> eventPointer;
-typedef std::shared_ptr<Entity> enemyPointer; //Zamiast entity mialo byc Movable, ale nie bylo funkcji takeDamage :(
+
+
 
 class GameObjectHandler
 {
@@ -19,7 +19,7 @@ private:
     std::vector<drawablePointer> playerLayer;       // player, monsters, walls
     std::vector<drawablePointer> foregroundLayer;   // things which should obstruct view
     std::vector<drawablePointer> interfaceLayer;   // interface
-    std::vector<enemyPointer> enemyLayer;
+
     std::vector<updatablePointer> updatableObjects;
     std::vector<eventPointer> eventObjects;
     
@@ -34,7 +34,6 @@ public:
 
     void subscribeBackground(drawablePointer object);
     void subscribePlayerLayer(drawablePointer object);
-    void subscribeEnemyLayer(enemyPointer object);
     void subscribeForeground(drawablePointer object);
     void subscribeInterface(drawablePointer object);
 
@@ -43,7 +42,6 @@ public:
 
     void unsubscribeBackground(drawablePointer object);
     void unsubscribePlayerLayer(drawablePointer object);
-    void unsubscribeEnemyLayer(enemyPointer object);
     void unsubscribeForeground(drawablePointer object);
     void unsubscribeInterface(drawablePointer object);
 
@@ -52,7 +50,6 @@ public:
 
     std::vector<drawablePointer> getBackgroundLayer();
     std::vector<drawablePointer> getPlayerLayer();
-    std::vector<enemyPointer> getEnemyLayer();
     std::vector<drawablePointer> getForegroundLayer();
     std::vector<drawablePointer> getInterfaceLayer();
 
