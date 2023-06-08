@@ -14,7 +14,7 @@ protected:
 	double VELOCITY = 1;
 
 	double mVelX = 0, mVelY = 0;
-
+	bool is_coliding;
 	double mInternalX = 0, mInternalY = 0;
 	double mInPreviousX = 0, mInPreviousY = 0;
 

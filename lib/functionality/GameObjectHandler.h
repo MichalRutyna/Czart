@@ -7,6 +7,7 @@
 #include "GameObjects.h"
 #include "../objects/Entity.h"
 
+typedef class Entity Entity;
 typedef std::shared_ptr<_Drawable> drawablePointer;
 typedef std::shared_ptr<_Updatable> updatablePointer;
 typedef std::shared_ptr<_HandlingEvents> eventPointer;

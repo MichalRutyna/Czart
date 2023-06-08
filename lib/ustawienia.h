@@ -31,7 +31,7 @@ public:
 	static const int DT = 10;
 	static constexpr const float VELOCITY_MULTIPLIER = 2.0f;
 	static const int ORB_SIZE = 150;
-
+	
 private:
 	UST() {}
 	UST(const UST&);

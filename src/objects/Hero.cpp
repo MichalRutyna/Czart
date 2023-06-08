@@ -56,16 +56,18 @@ void Hero::render()
             mFrame = 0;
             state = 0;
             changeTexture(texture_idle);
-        }
+        }   
     }
+    if (mMana < MAX_MANA && mFrame%6 == 0) mMana++;
 }
 
 void Hero::handleEvent(SDL_Event& e)
 {
-    if (e.key.keysym.sym == SDLK_SPACE && e.key.repeat == 0 && e.type == SDL_KEYDOWN)
+    if (e.key.keysym.sym == SDLK_SPACE && e.key.repeat == 0 && e.type == SDL_KEYDOWN && getMana()>=20)
     {
         state = 1;
         mFrame = 0;
+        mMana -= 20;
     }
     PlayerMovable::handleEvent(e);
 }

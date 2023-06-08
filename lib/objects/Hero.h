@@ -21,4 +21,5 @@ public:
 	void render();
 	void handleEvent(SDL_Event& e);
 	int state = 0;
+	int killed = 0;
 };

@@ -1,6 +1,5 @@
 #include "../../lib/objects/Entity.h"
 
-
 Entity::Entity(rendererType& renderer, textureType tekstura, cameraType kamera) : DMovable(renderer, tekstura, kamera)
 {
 	std::cout << "stworzono entity";
@@ -36,13 +35,16 @@ int Entity::getMaxMana()
 	return MAX_MANA;
 }
 
-void Entity::takeDamage(int amount, int side)
+void Entity::takeDamage(int amount, int side, int & killed)
 {
 	mHp -= amount;
 	if (mHp <= 0)
 	{
 		// request to be deleted
-		destroy = true;
+		VELOCITY = 0;
+		is_coliding = false;
+		mInternalY = 8300;
+		killed++;
 	}
 	if (side == 1)
 	{

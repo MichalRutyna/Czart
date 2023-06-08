@@ -72,6 +72,9 @@ int main(int argc, char* argv[])
     auto mana_texture = std::make_shared<LTexture>();
     mana_texture->loadFromFile(renderer, "resources/kula_mana.png", 30 * ust.ORB_SIZE, ust.ORB_SIZE);
 
+    auto game_over_texture = std::make_shared<LTexture>();
+    game_over_texture->loadFromFile(renderer, "resources/game_over.png");
+
     std::cout << "Pomyslnie wczytano tekstury\n";
 
     // ---------------------------Object initialization-------------------------------------
@@ -79,6 +82,7 @@ int main(int argc, char* argv[])
     //auto kask = std::make_shared<Renderable>(renderer, kask_text, kamera);
     //auto mieczyk = std::make_shared<Renderable>(renderer, mieczyk_text, kamera);
     auto background = std::make_shared<Tlo>(renderer, background_txt, kamera);
+    auto game_over = std::make_shared<Tlo>(renderer, game_over_texture, kamera);
 
     auto hpOrb_border = std::make_shared<OrbBorder>(renderer, orb_border_text, 98, ust.SCREEN_HEIGHT - 204);
     auto manaOrb_border = std::make_shared<OrbBorder>(renderer, orb_border_text, 1300, ust.SCREEN_HEIGHT - 204);
@@ -118,7 +122,7 @@ int main(int argc, char* argv[])
     // ------------------------------------------------------------------------------------
     std::cout << "Rozpoczynam petle zdarzen\n";
   
-    while (!quit)
+    while (stachu->getHp() > 0)
     {
         while (SDL_PollEvent(&e) != 0)
         {
@@ -192,18 +196,33 @@ int main(int argc, char* argv[])
         {
             element->render();
         }
-        if (i % 20 == 0)
+        if (i % 100 == 0)
         {
             auto testowy_diobel = std::make_shared<Enemy>(renderer, enemy_texture_idle, enemy_texture_run, enemy_texture_attack, kamera);
             objHandler.subscribePlayerLayer(testowy_diobel);
             objHandler.subscribeUpdatable(testowy_diobel);
+            objHandler.subscribeEnemyLayer(testowy_diobel);
             testowy_diobel->setHero(stachu);
         }
         SDL_RenderPresent(renderer.get()); //update
         i++;
         // -----------------------------------------------------------------------------------
- 
+        if (stachu->state == 1)
+        {
+            int oponent = 0;
+            int xd, yd;
+            while (oponent < objHandler.getEnemyLayer().size())
+            {
+                xd = objHandler.getEnemyLayer()[oponent]->getX();
+                yd = objHandler.getEnemyLayer()[oponent]->getY();
+                if (stachu->getX()+170 - xd < 300 && stachu->getX()+100 - xd > 0 && abs(stachu->getY()+140-yd)<100 && stachu->facing == -1) objHandler.getEnemyLayer()[oponent]->takeDamage(5, 1, stachu->killed);
+                if (stachu->getX() - xd > -300 && stachu->getX()+100 - xd < 0 && abs(stachu->getY() + 140 - yd) < 100 && stachu->facing == 1) objHandler.getEnemyLayer()[oponent]->takeDamage(5, -1, stachu->killed);
+                oponent++;
+            }
+        }
     }
     close();
+    system("cls");
+    std::cout << "ZGLADZILES " << stachu->killed << " SLUGUSOW SZATANA" << std::endl;
     return 0;
 }

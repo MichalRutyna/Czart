@@ -118,14 +118,15 @@ void Enemy::setHero(std::shared_ptr<Hero> hero)
 
 void Enemy::attack()
 {
-    if (state == 0 && cooldown == 0)
+    if (state == 0 && cooldown == 0 && mHp>0)
     {
+        int trash = 0;
         state = 1;
         mFrame = 0;
         changeTexture(texture_attack);
         // TODO
         int side = mVisibleX + mWidth/2 - mHero->getX() - mHero->getWidth()/2;
-        side < 0 ? mHero->takeDamage(ATTACK, -1) : mHero->takeDamage(ATTACK, 1);
+        side < 0 ? mHero->takeDamage(ATTACK, -1, trash) : mHero->takeDamage(ATTACK, 1, trash);
             
     }
 }

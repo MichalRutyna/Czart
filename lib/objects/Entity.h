@@ -14,8 +14,7 @@ protected:
 
 	int mHp = 0;
 	int mMana = 0;
-
-
+	
 public:
 	Entity(rendererType& renderer, textureType tekstura, cameraType kamera);
 	virtual ~Entity();
@@ -26,8 +25,7 @@ public:
 	int getMaxHp();
 	int getMana();
 	int getMaxMana();
-
-	void takeDamage(int amount, int side);
+	void takeDamage(int amount, int side, int & killed);
 	void manaCost(int amount);
 
 };

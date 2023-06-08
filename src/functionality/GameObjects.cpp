@@ -25,25 +25,26 @@ void Movable::move_step(int timeStep_ms)
 
 void Movable::handleCollisions()
 {
-	if (mInternalX < 0)
+	if (is_coliding)
 	{
-		mInternalX = 0;
-	}
-	else if (mInternalX + mWidth/8 > ust.LEVEL_WIDTH)
-	{
-		mInternalX = static_cast<double>(ust.LEVEL_WIDTH - mWidth/8);
-	}
+		if (mInternalX < 0)
+		{
+			mInternalX = 0;
+		}
+		else if (mInternalX + mWidth / 8 > ust.LEVEL_WIDTH)
+		{
+			mInternalX = static_cast<double>(ust.LEVEL_WIDTH - mWidth / 8);
+		}
 
-	if (mInternalY < 0)
-	{
-		mInternalY = 0;
+		if (mInternalY < 0)
+		{
+			mInternalY = 0;
+		}
+		else if (mInternalY + mHeight > ust.LEVEL_HEIGHT)
+		{
+			mInternalY = static_cast<double>(ust.LEVEL_HEIGHT - mHeight);
+		}
 	}
-	else if (mInternalY + mHeight > ust.LEVEL_HEIGHT)
-	{
-		mInternalY = static_cast<double>(ust.LEVEL_HEIGHT - mHeight);
-	}
-
-
 }
 
 void Movable::move(double alpha)
